@@ -1,0 +1,53 @@
+{% extends "base.twig" %}
+
+{% block content %}
+    <div id="content" style="display: none;">
+        <div class="photo_page">
+            <section class="photo_line">
+                <div class="photo horizontal picture_big"
+                        style="background-image: url('/img/main/1.jpg');">&nbsp;</div>
+                <div class="horizontal block_min">
+                    <div class="photo horizontal picture_min"
+                         style="background-image: url('/img/main/2.jpg');">&nbsp;</div>
+                    <div class="photo horizontal picture_min"
+                         style="background-image: url('/img/main/3.jpg');">&nbsp;</div>
+                </div>
+                <div class="photo vertical picture_mid"
+                     style="background-image: url('/img/main/4.jpg');">&nbsp;</div>
+
+                <a href="/contacts/">
+                    <div class="photo horizontal picture_big picture_text white_on_blue">
+                        <span>Контакты</span>
+                    </div>
+                </a>
+                <div class="horizontal block_min">
+                    <div class="photo horizontal picture_min black_on_white">&nbsp;</div>
+                    <div class="photo horizontal picture_min black_on_white">&nbsp;</div>
+                </div>
+            </section>
+            <section>
+                <div class="horizontal block_min">
+                    <div class="photo horizontal picture_min black_on_white">&nbsp;</div>
+                    <div class="photo horizontal picture_min black_on_white">&nbsp;</div>
+                </div>
+                <a href="#">
+                    <div class="photo horizontal picture_big picture_text black_on_white">
+                        <span>Альбомы</span>
+                    </div>
+                </a>
+
+                <div class="photo vertical picture_mid"
+                     style="background-image: url('/img/main/5.jpg');">&nbsp;</div>
+
+                <div class="horizontal block_min">
+                    <div class="photo horizontal picture_min"
+                         style="background-image: url('/img/main/6.jpg');">&nbsp;</div>
+                    <div class="photo horizontal picture_min"
+                         style="background-image: url('/img/main/7.jpg');">&nbsp;</div>
+                </div>
+                <div class="photo horizontal picture_big"
+                     style="background-image: url('/img/main/8.jpg');">&nbsp;</div>
+            </section>
+        </div>
+    </div>
+{% endblock %}

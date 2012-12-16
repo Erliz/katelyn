@@ -1,0 +1,35 @@
+{% extends "base.twig" %}
+
+{% block content %}
+    <div id="content" style="display: none;">
+        <div class="photo_page">
+            <section class="block_vertical horizontal">
+                <div class="photo horizontal picture_big picture_text white_on_blue">
+                    <span>Контакты</span>
+                </div>
+                <div class="photo horizontal picture_big picture_text black_on_white">
+                    <a href="mailto:katelyn.k@ya.ru" target="_blank" class="text_link"><span>Katelyn.K@ya.ru</span></a>
+                </div>
+            </section>
+            <div class="tile horizontal black_on_white block_feedback">
+                <form action="" class="contact" method="post">
+                    <section>
+                        <label for="form_name" class="horizontal"><strong>Ваше имя</strong></label>
+                        <input id="form_name" class="photo rigth black_on_white form_field" type="text" name="name">
+                        <div class="clearfix"></div>
+                        <label for="form_email" class="horizontal"><strong>Ваш e-mail</strong></label>
+                        <input id="form_email" class="photo rigth black_on_white form_field" type="email" name="email">
+                        <div class="clearfix"></div>
+                        <label for="form_phone" class="horizontal"><strong>Ваш телефон</strong></label>
+                        <input id="form_phone" class="photo rigth black_on_white form_field" type="text" name="phone">
+                        <div class="clearfix"></div>
+                    </section>
+                    <label for="form_text"><strong>Текст сообщения</strong></label>
+                    <textarea class="photo black_on_white" rows="8" cols="70" id="form_text"></textarea>
+                    <div class="clearfix"></div>
+                    <a href="javascript:void(0)" class="photo white_on_blue noresize" id="form_submit">Отправить</a>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
