@@ -20,12 +20,12 @@ Abstract Class C_Base
                 'path'     => Array(
                     'url'     => $this->settings['url'],
                     'style'   => 'default',
-                    'counter' => $this->settings['counter']
-                ),
+                //    'counter' => $this->settings['counter']
+                )/*,
                 'counters' => Array(
                     'yandex' => $this->settings['counterYandex'],
                     'google' => $this->settings['counterGoogle']
-                )
+                )*/
             )
         );
     }
