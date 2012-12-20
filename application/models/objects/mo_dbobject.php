@@ -6,7 +6,7 @@
  */
 abstract class MO_DbObject extends MO_Object
 {
-    private $objectPrefix='MO_';
+    private $objectPrefix = 'MO_';
     /** @var $dbh PDO */
     private $dbh;
     private $currentClass;
@@ -20,9 +20,6 @@ abstract class MO_DbObject extends MO_Object
         $table = $this->getTableName();
         $columns = '`' . join('`,`', $this->getTableColumnsFields()) . '`';
         $placeholders = ':' . join(', :', $this->getTableColumnsFields());
-        M_Logger::echer($columns);
-        M_Logger::echer($placeholders);
-        M_Logger::echer($this->getTableColumns());
         $sql = "
           INSERT INTO $table
             ($columns)
@@ -34,6 +31,7 @@ abstract class MO_DbObject extends MO_Object
         try {
             $dbh = $this->getDbh();
             $stmt = $dbh->prepare($sql);
+
             return $stmt->execute($this->getTableColumns());
         } catch (PDOException $e) {
             M_Logger::echer($sql, 'SQL');
@@ -91,8 +89,8 @@ abstract class MO_DbObject extends MO_Object
         //$currentColumns = forward_static_call(array($this->getCurrentClass(), 'getCurrentClassProperty'));
         $currentColumns = $this->getCurrentClassProperty();
         $columns = array_keys(get_class_vars(__CLASS__));
-        foreach($columns as $field){
-            if(isset($currentColumns[$field])){
+        foreach ($columns as $field) {
+            if (isset($currentColumns[$field])) {
                 unset($currentColumns[$field]);
             }
         }
@@ -137,9 +135,10 @@ abstract class MO_DbObject extends MO_Object
 
     private function getCurrentClass()
     {
-        if(empty($this->currentClass)){
+        if (empty($this->currentClass)) {
             $this->setCurrentClass();
         }
+
         return $this->currentClass;
     }
 

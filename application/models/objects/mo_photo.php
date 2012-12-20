@@ -13,20 +13,23 @@ class MO_Photo extends MO_DbObject
     protected $time_upload;
     protected $is_vertical;
 
-    function __construct($isNew = true) {
+    function __construct($isNew = true)
+    {
         $this->setIsNew($isNew);
     }
 
-    public function save(){
+    public function save()
+    {
 
     }
 
-    static public function createFromArray($array){
-        if (empty($array)){
+    static public function createFromArray($array)
+    {
+        if (empty($array)) {
             throw new E_Fatal('empty create variable');
         }
 
-        $array=array_merge(
+        $array = array_merge(
             // todo: find better variant
             get_class_vars(__CLASS__),
             $array
@@ -91,7 +94,7 @@ class MO_Photo extends MO_DbObject
 
     public function setIsVertical($is_vertical)
     {
-        $this->is_vertical = (bool) $is_vertical;
+        $this->is_vertical = (bool)$is_vertical;
     }
 
     public function getIsVertical()
@@ -102,7 +105,8 @@ class MO_Photo extends MO_DbObject
     /**
      * @inherit
      */
-    public function getCurrentClassProperty(){
+    public function getCurrentClassProperty()
+    {
         return get_object_vars($this);
     }
 
