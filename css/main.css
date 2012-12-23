@@ -319,6 +319,12 @@ div.text_block h1 {
     text-decoration: none;
 }
 
+/* start signIn form */
+.signIn{
+    text-align: center;
+}
+/* end signIn form */
+
 /* ==========================================================================
    Helper classes
    ========================================================================== */

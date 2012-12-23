@@ -1,0 +1,20 @@
+{% extends "admin/layout.twig" %}
+
+{% block content %}
+
+<div id="content" style="display: none;">
+    <div class="photo_page">
+        <div class="tile horizontal black_on_white dashboard">
+            <form action="">
+                <label for="album" >Select Album</label>
+                <select id="album" name="album">
+                    {% for album in albums %}
+                    <option value="{{ album.id }}">{{ album.title }}</option>
+                    {% endfor %}
+                </select>
+                <
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

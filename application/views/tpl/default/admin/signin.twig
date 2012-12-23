@@ -1,0 +1,15 @@
+{% extends "admin/layout.twig" %}
+
+{% block content %}
+    <form hidden="true" id="signIn" class="signIn" action="" method="POST">
+        <input id="signInPasswd" type="password" name="passwd">
+    </form>
+{% endblock %}
+
+{% block js %}
+    {{ parent() }}
+    <script>
+        login();
+    </script>
+{% endblock %}
+
