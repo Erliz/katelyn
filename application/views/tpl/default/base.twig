@@ -39,7 +39,7 @@
     <div class="layout_text restriction">18+</div>
     <div class="layout_text header">
         <a href="/">
-            <span>{{ general.header_title }}</span><br>
+            <span>{{ general.header_text }}</span><br>
             <span>photographer</span>
         </a>
     </div>
@@ -50,7 +50,7 @@
 
 {% block footer %}
     {% set starYear = '2012' %}
-    <div class="layout_text copyright"><span>Copyright {{ starYear }}{% if "now"|date("Y")>starYear %}-{{ "now"|date("Y") }}{% endif %} &copy; {{ general.header_title }}</span></div>
+    <div class="layout_text copyright"><span>Copyright {{ starYear }}{% if "now"|date("Y")>starYear %}-{{ "now"|date("Y") }}{% endif %} &copy; {{ general.header_text }}</span></div>
 {% endblock %}
 {% block js %}
     <!-- jQuery -->
