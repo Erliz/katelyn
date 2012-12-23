@@ -53,12 +53,18 @@
     <div class="layout_text copyright"><span>Copyright {{ starYear }}{% if "now"|date("Y")>starYear %}-{{ "now"|date("Y") }}{% endif %} &copy; {{ general.header_title }}</span></div>
 {% endblock %}
 {% block js %}
+    <!-- jQuery -->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="/js/vendor/jquery-1.8.3.min.js"><\/script>')</script>
-    <script src="/js/plugins.js"></script>
-    <script src="/js/main.js"></script>
+    <!-- jQuery-UI -->
+    <link rel="stylesheet" href="/js/vendor/jquery_ui/jquery-ui-1.9.2.min.css">
+    <script src="/js/vendor/jquery_ui/jquery-ui-1.9.2.min.js"></script>
+    <!-- Messi -->
     <link rel="stylesheet" href="/js/vendor/messi/messi.min.css">
     <script src="/js/vendor/messi/messi.min.js"></script>
+    <!-- Site`s js -->
+    <script src="/js/plugins.js"></script>
+    <script src="/js/main.js"></script>
 {% endblock %}
 {% block counters %}
     {% include 'counter/google.twig' %}
