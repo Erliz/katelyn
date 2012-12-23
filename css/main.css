@@ -97,6 +97,7 @@ body {
     overflow: hidden;
     background: url("/img/background.jpg") top no-repeat #000;
     background-size: 110% auto;
+    /*background-attachment: fixed;*/
 }
 
 .layout_text {

@@ -8,3 +8,8 @@
 {% block counters %}
 {# none #}
 {% endblock %}
+
+{% block js %}
+    {{ parent() }}
+    <script src="/js/admin.js"></script>
+{% endblock %}
