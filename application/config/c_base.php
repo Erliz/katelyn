@@ -15,7 +15,9 @@ Abstract Class C_Base
                     'author'      => $this->settings['author'],
                     'title'       => $this->settings['title'],
                     'keywords'    => $this->settings['keywords'],
-                    'description' => $this->settings['desc']
+                    'description' => $this->settings['desc'],
+                    'header_text' => $this->settings['header_text'],
+                    'email'       => $this->settings['email']
                 ),
                 'path'     => Array(
                     'url'     => $this->settings['url'],

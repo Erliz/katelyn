@@ -11,20 +11,22 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     {% block headTitle %}
-        <title>Фотограф Клементьева Екатерина</title>
+        <title>{{ general.title }}</title>
     {% endblock %}
     {% block headDescription %}
-        <meta name="description" content="Портфолио фотографа Клементьева Екатерина">
+        <meta name="description" content="{{ general.description }}">
     {% endblock %}
     {% block headKeywords %}
         <meta name="keywords"
-              content="портфолио, фотографии, портрет, пейзаж, предметная съемка, фотограф, клементьева, екатерина, на заказ">
+              content="{{ general.keywords }}">
     {% endblock %}
     <meta name="viewport" content="width=device-width">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <link rel="favicon" href="/favicon.ico">
+    {% block css %}
     <link rel="stylesheet" href="/css/normalize.css">
     <link rel="stylesheet" href="/css/main.css">
+    {% endblock %}
     <script src="/js/vendor/modernizr-2.6.2.min.js"></script>
 </head>
 <body>
@@ -37,7 +39,7 @@
     <div class="layout_text restriction">18+</div>
     <div class="layout_text header">
         <a href="/">
-            <span>Klementyeva Ekaterina</span><br>
+            <span>{{ general.header_title }}</span><br>
             <span>photographer</span>
         </a>
     </div>
@@ -48,15 +50,16 @@
 
 {% block footer %}
     {% set starYear = '2012' %}
-    <div class="layout_text copyright"><span>Copyright {{ starYear }}{% if "now"|date("Y")>starYear %}-{{ "now"|date("Y") }}{% endif %} &copy; Klementyeva Ekaterina</span></div>
+    <div class="layout_text copyright"><span>Copyright {{ starYear }}{% if "now"|date("Y")>starYear %}-{{ "now"|date("Y") }}{% endif %} &copy; {{ general.header_title }}</span></div>
 {% endblock %}
-
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-<script>window.jQuery || document.write('<script src="/js/vendor/jquery-1.8.3.min.js"><\/script>')</script>
-<script src="/js/plugins.js"></script>
-<script src="/js/main.js"></script>
-<link rel="stylesheet" href="/js/vendor/messi/messi.min.css">
-<script src="/js/vendor/messi/messi.min.js"></script>
+{% block js %}
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="/js/vendor/jquery-1.8.3.min.js"><\/script>')</script>
+    <script src="/js/plugins.js"></script>
+    <script src="/js/main.js"></script>
+    <link rel="stylesheet" href="/js/vendor/messi/messi.min.css">
+    <script src="/js/vendor/messi/messi.min.js"></script>
+{% endblock %}
 {% block counters %}
     {% include 'counter/google.twig' %}
     {% include 'counter/yandex.twig' %}
