@@ -9,11 +9,15 @@ class C_Ajax extends C_Base
         $this->sendAnswer(false);
     }
 
-    private function sendAnswer($result){
-        if(!empty($result['error'])){
-            $answer = $result;
+    private function sendAnswer($result, $wrap=true){
+        if($wrap){
+            if(!empty($result['error'])){
+                $answer = $result;
+            } else {
+                $answer['data'] = $result;
+            }
         } else {
-            $answer['data'] = $result;
+            $answer = $result;
         }
         echo json_encode($answer);
         exit;
@@ -27,6 +31,7 @@ class C_Ajax extends C_Base
         $module=array_shift($get);
         switch($module){
             case 'album': $result=$this->album($get); break;
+            case 'photo': $result=$this->photo($get); break;
         }
 
         $this->sendAnswer($result);
@@ -43,4 +48,18 @@ class C_Ajax extends C_Base
         return $result;
     }
 
+    private function photo($get) {
+        $model = new M_Album();
+        $album = $model->getById((int)$_GET['album']);
+        if(!$album) return array('error'=>'No album "'.(int)$_GET['album'].'"');
+        $model = new M_Photo();
+        $model->setAlbum($album->getId());
+        $action = array_shift($get);
+        $result = false;
+        switch($action){
+            case 'upload': $this->sendAnswer($model->upload(), false); break;
+        }
+
+        return $result;
+    }
 }

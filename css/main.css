@@ -150,6 +150,12 @@ body {
     height: 372px;
 }
 
+.photo_page_wrapper {
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .tile {
     display: block;
     margin: 5px;
@@ -159,7 +165,11 @@ body {
 .photo {
     display: block;
     margin: 5px;
-    background: rgba(0, 186, 255, 0.5) no-repeat;
+    background: rgba(0, 186, 255, 0.5) no-repeat center;
+}
+
+.photo_transparent {
+    background: rgba(0, 0, 0, 0) no-repeat center;
 }
 
 .photo:hover {
@@ -187,6 +197,16 @@ body {
     width: 134.5px;
 }
 
+.horizontal_blocks {
+    height: 100%;
+    width: 274px;
+}
+
+.vertical_blocks {
+    height: 100%;
+    width: 123px;
+}
+
 .picture_big {
     width: 264px;
     height: 176px;
@@ -206,6 +226,10 @@ body {
     text-align: center;
     line-height: 170px;
     font-size: 48px;
+}
+
+.picture_text_min {
+    font-size: 26px;
 }
 
 .white_on_blue {
@@ -325,6 +349,29 @@ div.text_block h1 {
     text-align: center;
 }
 /* end signIn form */
+.pager {
+    padding-top: 5px;
+    text-align: center;
+}
+
+.pager a {
+    display: inline-block;
+    color: #000;
+    width: 15px;
+    height: 15px;
+    text-decoration: none;
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+a.pager_arrow {
+    margin: 0 5px;
+    width: 20px;
+    height: 20px;
+}
+
+a.pager_current {
+    background-color: rgba(0, 186, 255, 0.5);
+}
 
 /* ==========================================================================
    Helper classes

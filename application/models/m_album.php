@@ -32,4 +32,9 @@ class M_Album
 
         return $collection;
     }
+
+    public function getById($id) {
+        $collection = $this->getAll();
+        return $collection->getItemByVar('id',$id);
+    }
 }

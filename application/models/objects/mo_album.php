@@ -13,9 +13,34 @@ class MO_Album extends MO_DbObject
     protected $time_create;
     protected $time_modify;
 
+    /**
+     * @todo need to return object, not array
+     * @param $title
+     *
+     * @return array|bool
+     */
     static public function getByTitle($title){
         $model = new self();
         return $model->getBy(array('title'=>$title));
+    }
+
+    static public function getById($id){
+        $model = new self();
+        $options = $model->getBy(array('id'=>$id));
+        return self::fromArray($options);
+    }
+
+    /**
+     * @todo refactor
+     */
+    public function fillPhotos(){
+        $this->photos = new MO_Photos();
+        $sql="SELECT * FROM `photo` WHERE `album`=? ORDER BY `id`";
+        $stmt=Registry::$db->prepare($sql);
+        $stmt->execute(array($this->getId()));
+        while($row = $stmt->fetch()){
+            $this->photos->add(MO_Photo::fromArray($row));
+        }
     }
 
     /**

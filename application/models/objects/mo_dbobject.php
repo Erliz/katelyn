@@ -31,8 +31,9 @@ abstract class MO_DbObject extends MO_Object
         try {
             $dbh = $this->getDbh();
             $stmt = $dbh->prepare($sql);
-
-            return $stmt->execute($this->getTableColumns());
+            if($stmt->execute($this->getTableColumns())){
+                return $dbh->lastInsertId();
+            }
         } catch (PDOException $e) {
             M_Logger::echer($sql, 'SQL');
             M_Logger::echer($e);

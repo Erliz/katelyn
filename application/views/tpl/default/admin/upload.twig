@@ -7,7 +7,7 @@
             <div class="tile horizontal black_on_white dashboard">
                 <div class="album_select">
                     <label for="album" >Select Album</label>
-                    <select id="album" name="album">
+                    <select id="album" name="album" onchange="setAlbum(this)">
                         <option value="">----</option>
                         {% for album in albums.getCollection() %}
                         <option value="{{ album.getId() }}">{{ album.getTitle() }}</option>
