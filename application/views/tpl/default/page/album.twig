@@ -1,0 +1,54 @@
+{% extends "base.twig" %}
+
+{% block content %}
+    {% set currentUri = '/albums/id/'~request.album.getId()~'/' %}
+    {% set fullWidth = 945 %}
+    {% set hBlockWidth = 274 %}
+    {% set vBlockWidth = 129 %}
+    {% set currentWidth = 0 %}
+    {# getting page width #}
+    {% if request.album.photos.getPagesSize()>0 %}
+        {% set page = request.album.photos.getPage(request.page) %}
+        {% for block in page %}
+            {% set currentWidth = currentWidth + (block.is_vertical == 0 ? hBlockWidth : vBlockWidth) %}
+        {% endfor %}
+        <div id="content" style="display: none;">
+            <div class="photo_page">
+                <div style="width: {{ currentWidth }}px" class="photo_page_wrapper">
+                    {% for block in page %}
+                    <section class="horizontal {% if block.is_vertical == 0 %}horizontal_blocks{% else %}vertical_blocks{% endif %}">
+                        {% if request.page == 0 and loop.index0 == 0 %}
+                            <a href="javascript: void(0)">
+                                <div class="photo horizontal picture_big picture_text black_on_white">
+                                    <span>{{ request.album.getTitle() }}</span>
+                                </div>
+                            </a>
+                        {% endif %}
+                        {% for photo in block.photos %}
+                        <div class="photo photo_transparent horizontal {% if block.is_vertical == 0 %}picture_big{% else %}picture_mid{% endif %}" style="background-image: url('/files/photo/thumbnail/{{ photo.getId() }}.jpg');">&nbsp;</div>
+                        {% endfor %}
+                    </section>
+                    {% endfor %}
+                </div>
+               {# {% if request.album.photos.getPagesSize()>request.page+1 %}
+                    <a href="/albums/id/{{ request.album.getId() }}/{{ request.page+1 }}/" class="pager_arrow pager_arrow_right black_on_white"><span>&#9654;</span></a>
+                {% endif %}
+                {% if request.page>0 %}
+                    <a href="/albums/id/{{ request.album.getId() }}/{{ request.page-1 }}/" class="pager_arrow pager_arrow_left black_on_white"><span>&#9664;</span></a>
+                {% endif %}#}
+            </div>
+            <div class="pager">
+                {% if request.page > 0 %}
+                    <a href="{{ currentUri }}{{ request.page-1 }}/" class="pager_arrow">&nbsp;</a>
+                {% endif %}
+                {% for pageNum in 1..request.album.photos.getPagesSize() %}
+                <a href="{{ currentUri }}{{ pageNum-1 }}/" {% if (pageNum-1) == request.page %}class="pager_current"{% endif %}>&nbsp;</a>
+                {% endfor %}
+                {% if request.album.photos.getPagesSize()>request.page+1 %}
+                    <a href="{{ currentUri }}{{ request.page+1 }}/" class="pager_arrow">&nbsp;</a>
+                {% endif %}
+            </div>
+        </div>
+    {% endif %}
+
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends "base.twig" %}
+
+{% block content %}
+    <div id="content" style="display: none;">
+        <div class="photo_page">
+            {% if request.albums|length>0 %}
+            <section class="photo_line">
+                {% for album in request.albums %}
+                <a href="/albums/id/{{ album.getId() }}/">
+                    <div class="photo horizontal picture_big picture_text picture_text_min white_on_blue">
+                        <span>{{ album.getTitle() }}</span>
+                    </div>
+                </a>
+                {% endfor %}
+            </section>
+            <section>
+            </section>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

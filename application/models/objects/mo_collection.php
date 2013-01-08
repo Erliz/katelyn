@@ -205,4 +205,17 @@ class MO_Collection
 
         return false;
     }
+
+    public function sortBy($key)
+    {
+        usort(
+            $this->library,
+            function ($a, $b){
+                if ($a->$key == $b->$key) {
+                    return 0;
+                }
+                return ($a->$key < $b->$key) ? -1 : 1;
+            }
+        );
+    }
 }
