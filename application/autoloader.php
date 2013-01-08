@@ -22,6 +22,7 @@ Class Autoloader
     {
         spl_autoload_register(array($this, 'load'));
         spl_autoload_register(array($this, 'load_twig'));
+        spl_autoload_register(array($this, 'load_vendor'));
     }
 
     /**
@@ -62,6 +63,19 @@ Class Autoloader
             return true;
         }
         throw new Exception('Not find class:' . $class . ', on path:' . $file);
+    }
+
+    private function load_vendor($class)
+    {
+        $filename = $class . '.php';
+        $dir = 'application' . DIRSEP . 'vendors' . DIRSEP;
+        if (is_file($file = $dir . $filename)) {
+            include_once ($file);
+
+            return true;
+        }
+
+        return false;
     }
 
     private function load_object($filename)

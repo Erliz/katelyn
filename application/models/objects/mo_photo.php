@@ -18,9 +18,9 @@ class MO_Photo extends MO_DbObject
         $this->setIsNew($isNew);
     }
 
-    public function save()
+    public function saveToBase()
     {
-
+        $this->id=parent::saveToBase();
     }
 
     static public function createFromArray($array)
@@ -40,6 +40,23 @@ class MO_Photo extends MO_DbObject
         $instance->setTitle($array['title']);
         $instance->setDescription($array['description']);
         // todo: now it`s hard code
+        $instance->setTimeUpload($array['time_upload']);
+        $instance->setIsVertical($array['is_vertical']);
+
+        return $instance;
+    }
+
+    public static function fromArray(array $array){
+        $array = array_merge(
+        // todo: find better variant
+            get_class_vars(__CLASS__),
+            $array
+        );
+        $instance = new self(false);
+        $instance->id=$array['id'];
+        $instance->setAlbum($array['album']);
+        $instance->setTitle($array['title']);
+        $instance->setDescription($array['description']);
         $instance->setTimeUpload($array['time_upload']);
         $instance->setIsVertical($array['is_vertical']);
 
@@ -82,9 +99,9 @@ class MO_Photo extends MO_DbObject
         $this->description = $description;
     }
 
-    private function setTimeUpload($time_upload)
+    private function setTimeUpload($time_upload = null)
     {
-        $this->time_upload = $time_upload;
+        $this->time_upload = $time_upload?:time();
     }
 
     public function getTimeUpload()

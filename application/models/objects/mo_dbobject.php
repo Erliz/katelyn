@@ -18,8 +18,8 @@ abstract class MO_DbObject extends MO_Object
     public function saveToBase()
     {
         $table = $this->getTableName();
-        $columns = '`' . join('`,`', $this->getTableColumnsFields()) . '`';
-        $placeholders = ':' . join(', :', $this->getTableColumnsFields());
+        $columns = $this->generateColumnsString($this->getTableColumnsFields());
+        $placeholders = $this->generatePlaceholersString($this->getTableColumnsFields());
         $sql = "
           INSERT INTO $table
             ($columns)
@@ -31,13 +31,65 @@ abstract class MO_DbObject extends MO_Object
         try {
             $dbh = $this->getDbh();
             $stmt = $dbh->prepare($sql);
-
-            return $stmt->execute($this->getTableColumns());
+            if($stmt->execute($this->getTableColumns())){
+                return $dbh->lastInsertId();
+            }
         } catch (PDOException $e) {
             M_Logger::echer($sql, 'SQL');
             M_Logger::echer($e);
             exit;
         }
+    }
+
+    protected function getBy(array $array, $limit = 1){
+        if(!is_numeric($limit)){
+            throw new E_Fatal('$limit is not numeric');
+        }
+        $table = $this->getTableName();
+        $where = $this->generateWhereString(array_keys($array));
+        $sql = "
+          SELECT *
+          FROM $table
+          WHERE $where
+          LIMIT $limit;
+        ";
+        /** @var $dbh PDO */
+        try {
+            $dbh = $this->getDbh();
+            $stmt = $dbh->prepare($sql);
+
+            $stmt->execute($array);
+            $result = $stmt->fetchAll();
+        } catch (PDOException $e) {
+            M_Logger::echer($sql, 'SQL');
+            M_Logger::echer($e);
+            exit;
+        }
+        if (is_array($result) && count($result) > 0) {
+            if ($limit == 1) {
+                return $result[0];
+            } else {
+                return $result;
+            }
+        }
+
+        return false;
+    }
+
+    private function generateWhereString(array $array){
+        $columns=array();
+        foreach($array as $column){
+            $columns[]="`$column`=:$column";
+        }
+        return join(' AND ', $columns);
+    }
+
+    private function generateColumnsString(array $array){
+        return '`' . join('`,`', $array) . '`';
+    }
+
+    private function generatePlaceholersString(array $array){
+        return ':' . join(', :', $array);
     }
 
     /**

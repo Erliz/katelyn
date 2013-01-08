@@ -4,3 +4,25 @@
     width: 100%;
     height: 362px;
 }
+
+div.album_select {
+    padding: 10px 10px 10px 15px;
+    text-align: center;
+}
+
+.album_select label{
+    color: white;
+}
+
+.album_select label{
+    margin-right: 20px;
+}
+.album_select button{
+    margin-left: 20px;
+}
+
+table.tile {
+    color: white;
+    text-align: center;
+    padding: 10px;
+}

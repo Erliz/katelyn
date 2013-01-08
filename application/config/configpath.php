@@ -8,6 +8,11 @@ class ConfigPath
     public static $core_cache = 'application/logs/cache/';
     public static $logs_core = 'application/logs/';
     public static $logic = 'application/logic/';
+    public static $files = 'files/';
+    public static $photo = 'files/photo/';
+    public static $photoTbn = 'files/photo/thumbnail/';
+    public static $photoTmp = 'files/temp/';
+    public static $photoTmpTbn = 'files/temp/thumbnail/';
     // public settings
     public static $publicDomain = 'katelyn.ru';
     public static $publicPort = '80';
