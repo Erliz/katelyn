@@ -1,0 +1,37 @@
+{% extends "admin/layout.twig" %}
+
+
+{% block content %}
+    <div id="content">
+        {% if album is defined %}
+        <div class="photo_page">
+            <div class="tile horizontal black_on_white dashboard">
+                <h1>{{ album.getTitle() }}</h1>
+                <form action="" method="post">
+                    <label for="album_title">Заголовок</label>
+                    <input id="album_title" type="text" name="title" value="{{ album.getTitle() }}"><br>
+                    <label for="album_description">Описание</label>
+                    <input id="album_description" type="text" name="description" value="{{ album.getDescription() }}"><br>
+                    <label for="album_cover">Обложка</label>
+                    <select id="album_cover" name="cover" onchange="showCoverImg($(this).val())">
+                        <option value="">Выберите фотографию</option>
+                        {% for photo in album.getPhotos() if photo.getIsVertical()==0 %}
+                        <option value="{{ photo.getId() }}">{{ photo.getTitle() }}</option>
+                        {% endfor %}
+                    </select><br>
+                    {% if album.getCover() is null %}
+                        <img id="album_cover_img" class="hidden" src="" >
+                    {% else %}
+                        <img id="album_cover_img" width="264px" height="176px" src="/files/photo/thumbnail/{{ album.getCover() }}.jpg" >
+                    {% endif %}
+                    <br>
+                    <input type="submit" value="Save">
+                </form>
+            </div>
+        </div>
+        {% else %}
+        <div class="text_block">
+            <h1>Альбом не найден</h1>
+        </div>
+    {% endif %}
+{% endblock %}

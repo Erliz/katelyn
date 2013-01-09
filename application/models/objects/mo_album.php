@@ -3,6 +3,7 @@
  * User: Elio
  * Date: 23.12.12
  *
+ * @property MO_Photos photos
  */
 class MO_Album extends MO_DbObject
 {
@@ -14,7 +15,7 @@ class MO_Album extends MO_DbObject
     protected $time_modify;
 
     /**
-     * @todo need to return object, not array
+     * @todo need to return object, not arrays
      * @param $title
      *
      * @return array|bool
@@ -30,6 +31,11 @@ class MO_Album extends MO_DbObject
         return self::fromArray($options);
     }
 
+    public function saveToBase(){
+        $this->setTimeModify();
+        parent::saveToBase();
+    }
+
     /**
      * @todo refactor
      */
@@ -41,6 +47,11 @@ class MO_Album extends MO_DbObject
         while($row = $stmt->fetch()){
             $this->photos->add(MO_Photo::fromArray($row));
         }
+    }
+
+    public function getPhotos()
+    {
+        return $this->photos->getCollection();
     }
 
     /**
@@ -80,7 +91,8 @@ class MO_Album extends MO_DbObject
         $instance->setId($array['id']);
         $instance->setTitle($array['title']);
         $instance->setDescription($array['description']);
-        $instance->setCover(!empty($array['cover'])?MO_Photo::createFromArray($array['cover']):null);
+        //$instance->setCover(!empty($array['cover'])?MO_Photo::createFromArray(array('id'=>$array['cover'])):null);
+        $instance->setCover(!empty($array['cover'])?$array['cover']:null);
         $instance->setTimeCreate($array['time_create']);
         $instance->setTimeModify($array['time_modify']);
 
@@ -143,8 +155,8 @@ class MO_Album extends MO_DbObject
         return $this->time_modify;
     }
 
-    public function setTimeModify($time_modify)
+    public function setTimeModify($time_modify=null)
     {
-        $this->time_modify = $time_modify;
+        $this->time_modify = $time_modify?:time();
     }
 }

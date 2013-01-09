@@ -1,0 +1,22 @@
+{% extends "admin/layout.twig" %}
+
+{% block content %}
+    {% set albumUri = '/admin/edit/album/' %}
+    <div id="content">
+        {% if albums.getSize()>0 %}
+        <div class="photo_page">
+            <div class="tile horizontal black_on_white dashboard">
+            {% for album in albums.getCollection() %}
+                <div>
+                    <a href="{{ albumUri }}{{ album.getId() }}/">{{ album.getTitle() }}</a>
+                </div>
+            {% endfor %}
+            </div>
+        </div>
+        {% else %}
+            <div class="text_block">
+                <h1>Альбомов не найдено</h1>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

@@ -13,13 +13,52 @@ abstract class MO_DbObject extends MO_Object
     private $tableName;
     private $tableColumns;
     private $tableColumnsFields;
-    private $is_new;
+    private $is_new=false;
 
     public function saveToBase()
     {
         $table = $this->getTableName();
-        $columns = $this->generateColumnsString($this->getTableColumnsFields());
-        $placeholders = $this->generatePlaceholersString($this->getTableColumnsFields());
+        $fields = $this->getTableColumnsFields();
+
+        if($this->is_new){
+            $result = $this->insertToBase($table, $fields);
+        } else {
+            $result = $this->updateToBase($table, $fields);
+        }
+
+        return $result;
+    }
+
+    private function updateToBase($table, $fields){
+        $where = $this->generateWhereString(array(array_shift($fields)));
+        $set=$this->generateSetString($fields);
+
+        $sql = "
+          UPDATE $table
+          SET $set
+          WHERE $where
+          LIMIT 1
+        ";
+
+        /** @var $dbh PDO */
+        try {
+            $dbh = $this->getDbh();
+            $stmt = $dbh->prepare($sql);
+            if($stmt->execute($this->getTableColumns())){
+                return true;
+            }
+        } catch (PDOException $e) {
+            M_Logger::echer($sql, 'SQL');
+            M_Logger::echer($e);
+            exit;
+        }
+
+        return false;
+    }
+
+    private function insertToBase($table, $fields){
+        $columns=$this->generateColumnsString($fields);
+        $placeholders=$this->generatePlaceholersString($fields);
         $sql = "
           INSERT INTO $table
             ($columns)
@@ -39,6 +78,8 @@ abstract class MO_DbObject extends MO_Object
             M_Logger::echer($e);
             exit;
         }
+
+        return false;
     }
 
     protected function getBy(array $array, $limit = 1){
@@ -76,12 +117,21 @@ abstract class MO_DbObject extends MO_Object
         return false;
     }
 
-    private function generateWhereString(array $array){
+    private function generateEqualsString(array $array){
         $columns=array();
         foreach($array as $column){
             $columns[]="`$column`=:$column";
         }
-        return join(' AND ', $columns);
+        return $columns;
+    }
+
+    private function generateWhereString(array $array){
+        return join(' AND ', $this->generateEqualsString($array));
+    }
+
+    private function generateSetString(array $array){
+
+        return join(', ', $this->generateEqualsString($array));
     }
 
     private function generateColumnsString(array $array){

@@ -37,4 +37,50 @@ class C_Admin extends C_Base
         );
         Registry::$display->disp($this->twigFolder . 'upload');
     }
+
+    public function edit($get)
+    {
+        if(!is_array($get) || count($get)==0){
+            $this->index();
+        }
+        $action = array_shift($get);
+        switch($action){
+            case 'albums': $this->albums(); break;
+            case 'album': $this->album($get); break;
+        }
+    }
+
+    private function albums()
+    {
+        $model=new M_Album();
+        Registry::$display->assign(
+            Array('albums'=>$model->getAll())
+        );
+        Registry::$display->disp($this->twigFolder . 'albums');
+    }
+
+    private function album($get)
+    {
+        $id = array_shift($get);
+        $model=new M_Album();
+        $album=$model->getById($id);
+        if(!empty($_POST['title']) /*&& !empty($_POST['description'])*/){
+            $title=trim(strip_tags($_POST['title']));
+            $description=trim(strip_tags($_POST['description']));
+            $album->setTitle($title);
+            $album->setDescription($description);
+            if(!empty($_POST['cover'])){
+                if(preg_match('/([0-9]+)/',$_POST['cover'],$match)){
+                    $album->setCover($match[1]);
+                }
+            }
+            $album->saveToBase();
+        }
+        $album->fillPhotos();
+
+        Registry::$display->assign(
+            Array('album'=>$album)
+        );
+        Registry::$display->disp($this->twigFolder . 'album');
+    }
 }

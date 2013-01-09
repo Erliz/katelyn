@@ -33,6 +33,11 @@ class M_Album
         return $collection;
     }
 
+    /**
+     * @param int $id
+     *
+     * @return MO_Album
+     */
     public function getById($id) {
         $collection = $this->getAll();
         return $collection->getItemByVar('id',$id);

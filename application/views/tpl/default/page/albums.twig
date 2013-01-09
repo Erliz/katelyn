@@ -7,7 +7,9 @@
             <section class="photo_line">
                 {% for album in request.albums %}
                 <a href="/albums/id/{{ album.getId() }}/">
-                    <div class="photo horizontal picture_big picture_text picture_text_min white_on_blue">
+                    <div class="photo horizontal picture_big picture_text picture_text_min white_on_blue"
+                         {% if album.getCover() is not null %}style="background-image: url('/files/photo/thumbnail/{{ album.getCover() }}.jpg')"{% endif %}
+                    >
                         <span>{{ album.getTitle() }}</span>
                     </div>
                 </a>
