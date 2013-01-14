@@ -1,6 +1,6 @@
 $(document).ready(
     function(){
-        $('#content').fadeIn(3000);
+        $('#content').fadeIn(1500);
     }
 );
 
