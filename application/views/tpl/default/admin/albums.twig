@@ -6,6 +6,8 @@
         {% if albums.getSize()>0 %}
         <div class="photo_page">
             <div class="tile horizontal black_on_white dashboard">
+                <a href="/admin/">Админка</a>
+                <hr>
             {% for album in albums.getCollection() %}
                 <div>
                     <a href="{{ albumUri }}{{ album.getId() }}/">{{ album.getTitle() }}</a>

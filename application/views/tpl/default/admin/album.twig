@@ -7,6 +7,7 @@
         <div class="photo_page">
             <div class="tile horizontal black_on_white dashboard">
                 <h1>{{ album.getTitle() }}</h1>
+                <a class="rigth" href="/admin/">Альбомы</a>
                 <form action="" method="post">
                     <label for="album_title">Заголовок</label>
                     <input id="album_title" type="text" name="title" value="{{ album.getTitle() }}"><br>
