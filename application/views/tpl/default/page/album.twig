@@ -18,7 +18,7 @@
                     {% for block in page %}
                     <section class="horizontal {% if block.is_vertical == 0 %}horizontal_blocks{% else %}vertical_blocks{% endif %}">
                         {% if request.page == 0 and loop.index0 == 0 %}
-                            <a href="javascript: void(0)">
+                            <a href="/albums/">
                                 <div class="photo horizontal picture_big picture_text picture_text_min black_on_white">
                                     <span>{{ request.album.getTitle() }}</span>
                                 </div>
@@ -30,12 +30,6 @@
                     </section>
                     {% endfor %}
                 </div>
-               {# {% if request.album.photos.getPagesSize()>request.page+1 %}
-                    <a href="/albums/id/{{ request.album.getId() }}/{{ request.page+1 }}/" class="pager_arrow pager_arrow_right black_on_white"><span>&#9654;</span></a>
-                {% endif %}
-                {% if request.page>0 %}
-                    <a href="/albums/id/{{ request.album.getId() }}/{{ request.page-1 }}/" class="pager_arrow pager_arrow_left black_on_white"><span>&#9664;</span></a>
-                {% endif %}#}
             </div>
             <div class="pager">
                 {% if request.page > 0 %}
