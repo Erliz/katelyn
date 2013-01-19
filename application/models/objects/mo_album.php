@@ -72,7 +72,7 @@ class MO_Album extends MO_DbObject
             $array
         );
         $instance = new self();
-
+        $instance->setIsNew(true);
         $instance->setTitle($array['title']);
         $instance->setDescription($array['description']);
         // todo: now it`s hard code
