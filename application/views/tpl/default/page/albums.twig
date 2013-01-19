@@ -6,13 +6,23 @@
             {% if request.albums|length>0 %}
             <section class="photo_line">
                 {% for album in request.albums %}
-                <a href="/albums/id/{{ album.getId() }}/">
-                    <div class="photo horizontal picture_big picture_text picture_text_min white_on_blue"
-                         {% if album.getCover() is not null %}style="background-image: url('/files/photo/thumbnail/{{ album.getCover() }}.jpg')"{% endif %}
-                    >
+                <div class="js_album_wrapper photo picture_big horizontal white_on_blue"
+                {% if album.getCover() is not null %}
+                        style="background-image: url('/files/photo/thumbnail/{{ album.getCover() }}.jpg');"
+                {% endif %}>
+                <a class="js_album picture_text picture_text_min album_title" href="/albums/id/{{ album.getId() }}/">
+                    <span class="album_title">{{ album.getTitle() }}</span>
+                </a>
+                </div>
+                {#<a style="display: block;float: left;width: 264px;height: 176px;" href="/albums/id/{{ album.getId() }}/">
+                    <div class="photo picture_big picture_text picture_text_min white_on_blue"
+                     {% if album.getCover() is not null %}
+                         style="background-image: url('/files/photo/thumbnail/{{ album.getCover() }}.jpg')"
+                     {% endif %}>
                         <span>{{ album.getTitle() }}</span>
                     </div>
-                </a>
+                    <div><span style="height: 50px; background-color: rgba(0,0,0,0.5)">{{ album.getTitle() }}</span></div>
+                </a>#}
                 {% endfor %}
             </section>
             <section>
@@ -20,4 +30,14 @@
             {% endif %}
         </div>
     </div>
+{% endblock %}
+
+{% block js_ready %}
+    {{ parent() }}
+    $(document).on("mouseover", '.js_album_wrapper',function () {
+        $(this).find(".js_album").stop(true, false).animate({"padding-top":126}, 250, "linear")
+    })
+    .on("mouseleave", '.js_album_wrapper', function () {
+        $(this).find(".js_album").stop(true, false).animate({'padding-top':176}, 300, "linear")
+    });
 {% endblock %}

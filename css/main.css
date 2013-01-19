@@ -165,6 +165,7 @@ body {
 .photo {
     display: block;
     margin: 5px;
+    overflow: hidden;
     background: rgba(0, 186, 255, 0.5) no-repeat center;
 }
 
@@ -223,6 +224,7 @@ body {
 }
 
 .picture_text {
+    text-decoration: none;
     text-align: center;
     line-height: 170px;
     font-size: 48px;
@@ -236,6 +238,20 @@ body {
     color: #FFF;
     background-color: rgba(0, 186, 255, 0.5);
 }
+
+span.album_title {
+    display: block;
+    height: 50px;
+    line-height: 50px;
+    background-color: rgba(0,0,0,0.5);
+}
+
+a.album_title {
+    display: block;
+    padding-top: 176px; /*126px*/
+    color: inherit;
+}
+
 /* feedback */
 .block_feedback section{
     width: 30.5em;
