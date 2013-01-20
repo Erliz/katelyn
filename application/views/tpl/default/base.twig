@@ -65,8 +65,9 @@
     <!-- Site`s js -->
     <script src="/js/plugins.js"></script>
     <script src="/js/main.js"></script>
-    <script>$(document).ready(function(){ {% block js_ready %}{% endblock %} });</script>
 {% endblock %}
+    <script>$(document).ready(function(){ {% block js_ready %}{% endblock %} });</script>
+
 {% block counters %}
     {% include 'counter/google.twig' %}
     {% include 'counter/yandex.twig' %}

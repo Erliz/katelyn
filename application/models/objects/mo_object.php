@@ -86,4 +86,30 @@ abstract class MO_Object
 
         return (empty($empty)) ? true : $empty;
     }
+
+    public function toArray(){
+        $vars=get_object_vars($this);
+        $args=$vars['args'];
+        unset($vars['args']);
+        $instance=$vars;
+        if(!empty($args)){
+            foreach($args as $prop=>$value){
+                if (is_subclass_of($value, 'MO_Collection')){
+                    $collection=array();
+                    /** @var $value MO_Collection */
+                    foreach($value->getCollection() as $element){
+                        /** @var $element MO_Object */
+                        $collection[]=$element->toArray();
+                    }
+                    $instance[$prop]=$collection;
+                } elseif(is_subclass_of($value, 'MO_Object')) {
+                    /** @var $value MO_Object */
+                    $instance[$prop]=$value->toArray();
+                } else {
+                    $instance[$prop]=$value;
+                }
+            }
+        }
+         return $instance;
+    }
 }

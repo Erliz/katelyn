@@ -11,10 +11,18 @@ class C_Ajax extends C_Base
 
     private function sendAnswer($result, $wrap=true){
         if($wrap){
-            if(!empty($result['error'])){
-                $answer = $result;
+            if(is_object($result)){
+                if (is_subclass_of($result,'MO_Object')){
+                    $answer['data'] = $result->toArray();
+                } elseif (is_subclass_of($result, 'MO_Collection')){
+                    $answer['data'] = $result->getCollection();
+                }
             } else {
-                $answer['data'] = $result;
+                if(!empty($result['error'])){
+                    $answer = $result;
+                } else {
+                    $answer['data'] = $result;
+                }
             }
         } else {
             $answer = $result;
@@ -30,14 +38,25 @@ class C_Ajax extends C_Base
         $result=false;
         $module=array_shift($get);
         switch($module){
-            case 'album': $result=$this->album($get); break;
-            case 'photo': $result=$this->photo($get); break;
+            case 'album': $result=$this->admAlbum($get); break;
+            case 'photo': $result=$this->admPhoto($get); break;
         }
 
         $this->sendAnswer($result);
     }
 
-    private function album($get) {
+    public function album($get){
+        $model=new M_Album();
+        $action = array_shift($get);
+        $result=false;
+        switch($action){
+            case 'collection': $result=$model->getById($get[0]);$result->fillPhotos(); break;
+        }
+
+        $this->sendAnswer($result);
+    }
+
+    private function admAlbum($get) {
         $model=new M_Album();
         $action = array_shift($get);
         $result=false;
@@ -48,7 +67,7 @@ class C_Ajax extends C_Base
         return $result;
     }
 
-    private function photo($get) {
+    private function admPhoto($get) {
         $model = new M_Album();
         $album = $model->getById((int)$_GET['album']);
         if(!$album) return array('error'=>'No album "'.(int)$_GET['album'].'"');

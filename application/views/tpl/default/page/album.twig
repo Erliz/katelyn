@@ -16,27 +16,27 @@
             <div class="photo_page">
                 <div style="width: {{ currentWidth }}px" class="photo_page_wrapper">
                     {% for block in page %}
-                    <section class="horizontal {% if block.is_vertical == 0 %}horizontal_blocks{% else %}vertical_blocks{% endif %}">
-                        {% if request.page == 0 and loop.index0 == 0 %}
-                            <a href="/albums/">
-                                <div class="photo horizontal picture_big picture_text picture_text_min black_on_white">
-                                    <span>{{ request.album.getTitle() }}</span>
-                                </div>
-                            </a>
-                        {% endif %}
-                        {% for photo in block.photos %}
-                        <div class="photo photo_transparent horizontal {% if block.is_vertical == 0 %}picture_big{% else %}picture_mid{% endif %}" style="background-image: url('/files/photo/thumbnail/{{ photo.getId() }}.jpg');">&nbsp;</div>
-                        {% endfor %}
-                    </section>
+                        <section class="horizontal {% if block.is_vertical == 0 %}horizontal_blocks{% else %}vertical_blocks{% endif %}">
+                            {% if request.page == 0 and loop.index0 == 0 %}
+                                <a href="/albums/">
+                                    <div class="photo horizontal picture_big picture_text picture_text_min black_on_white">
+                                        <span>{{ request.album.getTitle() }}</span>
+                                    </div>
+                                </a>
+                            {% endif %}
+                            {% for photo in block.photos %}
+                                <div onclick="gallery.showPhoto({{ photo.getId() }});" class="photo photo_transparent horizontal {% if block.is_vertical == 0 %}picture_big{% else %}picture_mid{% endif %}" style="background-image: url('/files/photo/thumbnail/{{ photo.getId() }}.jpg');">&nbsp;</div>
+                            {% endfor %}
+                        </section>
                     {% endfor %}
                 </div>
             </div>
-            <div class="pager">
+            <div id="photo_pager" class="pager">
                 {% if request.page > 0 %}
                     <a href="{{ currentUri }}{{ request.page-1 }}/" class="pager_arrow">&nbsp;</a>
                 {% endif %}
                 {% for pageNum in 1..request.album.photos.getPagesSize() %}
-                <a href="{{ currentUri }}{{ pageNum-1 }}/" {% if (pageNum-1) == request.page %}class="pager_current"{% endif %}>&nbsp;</a>
+                    <a href="{{ currentUri }}{{ pageNum-1 }}/" {% if (pageNum-1) == request.page %}class="pager_current"{% endif %}>&nbsp;</a>
                 {% endfor %}
                 {% if request.album.photos.getPagesSize()>request.page+1 %}
                     <a href="{{ currentUri }}{{ request.page+1 }}/" class="pager_arrow">&nbsp;</a>
@@ -45,4 +45,26 @@
         </div>
     {% endif %}
 
+{% endblock %}
+
+{% block js %}
+    {{ parent() }}
+    <script src="/js/gallery.js"></script>
+    <script src="/js/vendor/jquery.tmpl.min.js"></script>
+    <script id="tmpl_photo_view" type="text/x-jquery-tmpl">
+        {% raw %}
+        <div id="photo_view_block" class="photo_view_wrapper {{if photo.isVertical()}}photo_view_vertical{{/if}}">
+            <div class="photo_view" style="background-image: url('${photo.getUrl()}');">
+                {{if prev}}<a href="javascript:void(0)" onclick="gallery.showPhoto(${prev.getId()})" title="Preview" class="photo_view_nav photo_view_left"></a>{{/if}}
+                {{if next}}<a href="javascript:void(0)" onclick="gallery.showPhoto(${next.getId()})" title="Next" class="photo_view_nav photo_view_right"></a>{{/if}}
+                <span class="photo_view_title">${photo.getTitle()}</span>
+            </div>
+        </div>
+        {% endraw %}
+    </script>
+{% endblock %}
+
+{% block js_ready %}
+    gallery=new Gallery({{ request.album.id }});
+    gallery.init();
 {% endblock %}
