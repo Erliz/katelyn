@@ -57,7 +57,7 @@
             <div class="photo_view" style="background-image: url('${photo.getUrl()}');">
                 {{if prev}}<a href="javascript:void(0)" onclick="gallery.showPhoto(${prev.getId()})" title="Preview" class="photo_view_nav photo_view_left"></a>{{/if}}
                 {{if next}}<a href="javascript:void(0)" onclick="gallery.showPhoto(${next.getId()})" title="Next" class="photo_view_nav photo_view_right"></a>{{/if}}
-                <span class="photo_view_title">${photo.getTitle()}</span>
+                <!--<span class="photo_view_title">${photo.getTitle()}</span>-->
             </div>
         </div>
         {% endraw %}
