@@ -63,14 +63,14 @@
     <script id="tmpl_photo_view_pager" type="text/x-jquery-tmpl">
         {% verbatim  %}
         <div id="photo_view_pager" class="pager">
-            <a href="javascript:void(0)" onclick="gallery.showPhoto(${prev.getId()})" title="Preview"
+            <a href="#${prev.getId()}" onclick="gallery.showPhoto(${prev.getId()})" title="Preview"
                {{if position==0}}style="visibility: hidden;"{{/if}}
                class="pager_arrow">&nbsp;</a>
             {{each collection}}
-            <a href="javascript:void(0)" onclick="gallery.showPhoto(${$value.id})" title="${$value.title}"
+            <a href="#${$value.id}" onclick="gallery.showPhoto(${$value.id})" title="${$value.title}"
                {{if position==$index}} class="pager_current" {{/if}}>&nbsp;</a>
             {{/each}}
-            <a href="javascript:void(0)" onclick="gallery.showPhoto(${next.getId()})" title="Next"
+            <a href="#${next.getId()}" onclick="gallery.showPhoto(${next.getId()})" title="Next"
                {{if size<=position+1}}style="visibility: hidden;"{{/if}}
                class="pager_arrow">&nbsp;</a>
         </div>

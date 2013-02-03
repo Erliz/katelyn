@@ -23,6 +23,11 @@ function login() {
         });
 }
 
-function currentUri(){
+function getUri(){
     return window.location.pathname;
+}
+
+function getHash(){
+    var hash = window.location.hash;
+    return (hash) ? hash.substring(1, hash.length) : false;
 }

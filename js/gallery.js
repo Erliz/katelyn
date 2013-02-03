@@ -148,8 +148,14 @@ function Gallery(id) {
                 object.album.description = data.description;
                 object.collection = new Collection(data.photos);
                 object.album.cover = new Photo(object.collection.getById(data.cover));
+                object.checkHash();
             }
         });
+    };
+
+    this.checkHash = function () {
+        var hash = getHash();
+        if (hash) this.showPhoto(hash);
     };
 
     this.sceneClear = function () {
