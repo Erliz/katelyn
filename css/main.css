@@ -366,12 +366,9 @@ form.contact {
 }
 #social_container a {
     display: block;
-    width: 38px;
-    height: 38px;
+    width: 50px;
+    height: 50px;
     text-decoration: none;
-    border-radius: 10px;
-    -moz-border-radius: 10px;
-    -webkit-border-radius: 10px;
 }
 #social_container a:hover {
     box-shadow: 0 0 10px #fff;
@@ -383,11 +380,11 @@ form.contact {
     background-image: url(/img/social/social.png);
     background-repeat: no-repeat;
 }
-li.social_fb{ background-position: 0 0;}
-li.social_gp{ background-position: -88px 0;}
+li.social_fb{ background-position: -120px 0;}
+li.social_gp{ background-position: -60px 0;}
+li.social_vk{ background-position: 0 0;}
 li.social_mailru{ background-position: -176px 0;}
 li.social_twitter{ background-position: -264px 0;}
-li.social_vk{ background-position: -352px 0;}
 li.social_yandex{ background-position: -440px 0;}
 /* end social */
 
