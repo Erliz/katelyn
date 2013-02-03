@@ -52,7 +52,7 @@
     <script src="/js/gallery.js"></script>
     <script src="/js/vendor/jquery.tmpl.min.js"></script>
     <script id="tmpl_photo_view" type="text/x-jquery-tmpl">
-        {% raw %}
+        {% verbatim  %}
         <div id="photo_view_block" class="photo_view_wrapper {{if photo.isVertical()}}photo_view_vertical{{/if}}">
             <div class="photo_view" style="background-image: url('${photo.getUrl()}');">
                 {{if prev}}<a href="javascript:void(0)" onclick="gallery.showPhoto(${prev.getId()})" title="Preview" class="photo_view_nav photo_view_left"></a>{{/if}}
@@ -60,7 +60,7 @@
                 <!--<span class="photo_view_title">${photo.getTitle()}</span>-->
             </div>
         </div>
-        {% endraw %}
+        {% endverbatim %}
     </script>
 {% endblock %}
 
