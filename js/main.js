@@ -31,3 +31,7 @@ function getHash(){
     var hash = window.location.hash;
     return (hash) ? hash.substring(1, hash.length) : false;
 }
+
+function setHash(hash){
+    window.location.hash=hash;
+}

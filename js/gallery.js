@@ -40,7 +40,7 @@ function Collection(array) {
     };
 
     this.getByKey = function (key) {
-        return this.library[key] || false;
+        return new Photo(this.library[key]) || false;
     };
 
     this.getPositionById = function (id) {
@@ -180,9 +180,8 @@ function Gallery(id) {
             var tpl = this.getTmpl(
                 'block',
                 {
-                    photo:this.showingPhoto,
-                    next:this.getCollection().getNext(id),
-                    prev:this.getCollection().getPrev(id)
+                    photo: this.showingPhoto,
+                    next: this.getCollection().getNext(id) || this.getCollection().getByKey(0)
                 }
             );
             var pager = this.getTmpl(
@@ -196,6 +195,7 @@ function Gallery(id) {
                     prev: this.getCollection().getPrev(id)
                 }
             );
+            setHash(id);
         }
         else {console.log('No such photo with id "'+id+'"');return;}
         var wrapper = this.getElement('content');
@@ -224,6 +224,7 @@ function Gallery(id) {
         this.getElement('block').remove();
         this.getElement('viewPager').remove();
         this.sceneFill();
+        setHash('');
         $(document).keyup();
         this.isShowing=false;
     }
