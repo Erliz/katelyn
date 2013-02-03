@@ -32,15 +32,15 @@
                 </div>
             </div>
             <div id="photo_pager" class="pager">
-                {% if request.page > 0 %}
-                    <a href="{{ currentUri }}{{ request.page-1 }}/" class="pager_arrow">&nbsp;</a>
-                {% endif %}
+                <a href="{{ currentUri }}{{ request.page-1 }}/"
+                   {% if request.page == 0 %}style="visibility: hidden;"{% endif %}
+                   class="pager_arrow">&nbsp;</a>
                 {% for pageNum in 1..request.album.photos.getPagesSize() %}
                     <a href="{{ currentUri }}{{ pageNum-1 }}/" {% if (pageNum-1) == request.page %}class="pager_current"{% endif %}>&nbsp;</a>
                 {% endfor %}
-                {% if request.album.photos.getPagesSize()>request.page+1 %}
-                    <a href="{{ currentUri }}{{ request.page+1 }}/" class="pager_arrow">&nbsp;</a>
-                {% endif %}
+                <a href="{{ currentUri }}{{ request.page+1 }}/"
+                   {% if request.album.photos.getPagesSize()<=request.page+1 %}style="visibility: hidden;"{% endif %}
+                   class="pager_arrow">&nbsp;</a>
             </div>
         </div>
     {% endif %}
