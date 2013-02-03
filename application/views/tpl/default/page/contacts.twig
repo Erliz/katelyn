@@ -21,7 +21,7 @@
                 </div>
             </section>
             <div class="tile horizontal black_on_white block_feedback">
-                <form action="" class="feedback" method="post">
+                <form action="" id="feedback_form" class="feedback" method="post" onsubmit="sendFeedback(this);return false;">
                     <section>
                         <label for="form_name" class="horizontal"><strong>Ваше имя</strong></label>
                         <input id="form_name" class="photo rigth black_on_white form_field" type="text" name="name">
@@ -34,9 +34,9 @@
                         <div class="clearfix"></div>
                     </section>
                     <label for="form_text"><strong>Текст сообщения</strong></label>
-                    <textarea class="photo black_on_white" rows="8" cols="70" id="form_text"></textarea>
+                    <textarea class="photo black_on_white" name="content" rows="8" cols="70" id="form_text"></textarea>
                     <div class="clearfix"></div>
-                    <a href="javascript:void(0)" onclick="notYetReady();" class="photo white_on_blue noresize" id="form_submit">Отправить</a>
+                    <a href="javascript:void(0)" onclick="$('#feedback_form').submit()" class="photo white_on_blue noresize" id="form_submit">Отправить</a>
                 </form>
             </div>
         </div>

@@ -56,6 +56,25 @@ class C_Ajax extends C_Base
         $this->sendAnswer($result);
     }
 
+    public function sendMail(){
+        if (empty($_POST)) {
+            $this->sendAnswer(false);
+        }
+        $text = '';
+        foreach ($_POST as $key => $value) {
+            $text[$key] = trim(strip_tags($value));
+        }
+        $message = "Об отправителе:\n";
+        $message .= 'Имя: ' . $text['name'] . "\n";
+        $message .= 'email: ' . $text['email'] . "\n";
+        $message .= 'Телефон: ' . $text['phone'] . "\n";
+        $message .= 'Тело сообщения:' . "\n";
+        $message .= $text['content'];
+        $mailer = new M_Mailer();
+        $result = $mailer->send($message);
+        $this->sendAnswer($result);
+    }
+
     private function admAlbum($get) {
         $model=new M_Album();
         $action = array_shift($get);

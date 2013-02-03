@@ -35,3 +35,25 @@ function getHash(){
 function setHash(hash){
     window.location.hash=hash;
 }
+
+function sendFeedback(form){
+    var values = {};
+    $(form).find(':input').each(function() {
+        values[this.name] = $(this).val();
+    });
+    console.log(values);
+    $.ajax({
+        async:false,
+        type:'POST',
+        url:'/ajax/sendMail/',
+        dataType:'json',
+        data: values,
+        success:function (data) {
+            if(data.data==true){
+                new Messi('Ваше сообщение было отправленно', {title:'Feedback'});
+            } else {
+                new Messi('Возникла ошибка при отправке сообщения</br>Вы можите отправить сообщение по этой ссылке и адресу <a href="mailto:katelyn.k@ya.ru?subject=Feedback">Katelyn.K@ya.ru</a>', {title:'Feedback'});
+            }
+        }
+    });
+}
