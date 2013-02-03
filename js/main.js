@@ -22,3 +22,7 @@ function login() {
             }
         });
 }
+
+function currentUri(){
+    return window.location.pathname;
+}
