@@ -67,7 +67,7 @@
                {{if position==0}}style="visibility: hidden;"{{/if}}
                class="pager_arrow">&nbsp;</a>
             {{each collection}}
-            <a href="javascript:void(0)" onclick="gallery.showPhoto(${$value.id})" title="${$value.title}"
+            <a href="javascript:void(0)" onclick="gallery.showPhoto(${$value.id})" title=""
                {{if position==$index}} class="pager_current" {{/if}}>&nbsp;</a>
             {{/each}}
             <a href="javascript:void(0)" onclick="gallery.showPhoto(${next.getId()})" title="Next"
