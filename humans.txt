@@ -2,8 +2,9 @@
 # The humans responsible & technology colophon
 
 # TEAM
-
-    Stanislav Vetlovskiy -- Coder -- @mrErliz
+    Code developer: Stanislav Vetlovskiy
+	Twitter: @mrErliz
+	From: Moscow, Russia
 
 # THANKS
 
@@ -14,4 +15,4 @@
     Last update: 2013/03/16
     Standards: HTML5, CSS3, PSR3, GIT
     Components: html5Boilerplate, Modernizr, jQuery, jQueryUI, jQuery File Upload, Messi
-    Software: JetBrains phpStorm, MySQL Workbench, phpMyAdmin
+    Software: JetBrains phpStorm, MySQL Workbench, phpMyA, FileZilla, Photoshop

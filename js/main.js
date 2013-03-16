@@ -4,6 +4,10 @@ $(document).ready(
     }
 );
 
+function isOpera(){
+    return (navigator.userAgent.indexOf('Presto') != -1);
+}
+
 function notYetReady() {
     new Messi('We are working on this feature.', {title:'Sorry'});
 }
@@ -67,7 +71,7 @@ function sendFeedback(form){
     ];
     var imgDefault ='/img/carrot/carrot70.png';
     var imgEl = $('#carrot');
-    if(!Modernizr.cssanimations || $.browser.opera){
+    if(!Modernizr.cssanimations || isOpera){
         var intervalId;
         imgEl.mouseenter(function() {
             var i = 0;

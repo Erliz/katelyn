@@ -137,7 +137,7 @@ function Gallery(id) {
 
     this.requestCollection = function () {
         if (this.collection) return;
-        var object = this;
+        var self = this;
         $.ajax({
             async: false,
             type: 'GET',
@@ -145,11 +145,11 @@ function Gallery(id) {
             dataType: 'json',
             success: function (data) {
                 data = data.data;
-                object.album.title = data.title;
-                object.album.description = data.description;
-                object.collection = new Collection(data.photos);
-                object.album.cover = new Photo(object.collection.getById(data.cover));
-                object.checkHash();
+                self.album.title = data.title;
+                self.album.description = data.description;
+                self.collection = new Collection(data.photos);
+                self.album.cover = new Photo(self.collection.getById(data.cover));
+                self.checkHash();
             }
         });
     };
@@ -205,16 +205,17 @@ function Gallery(id) {
         var wrapper = this.getElement('content');
         if (!this.isShowing) {
             this.sceneClear();
-            var object = this;
+            var self = this;
             $('<div></div>').addClass('substrate').click(function () {
-                object.close()
+                self.close()
             }).appendTo(wrapper);
+            console.log(tpl);
             tpl.hide().appendTo(wrapper).fadeIn();
             pager.hide().appendTo(wrapper).fadeIn();
             this.isShowing = true;
             $(document).keyup(function (e) {
                 if (e.keyCode == 27) {
-                    object.close();
+                    self.close();
                 }
             });
         } else {
@@ -222,7 +223,7 @@ function Gallery(id) {
             tpl.appendTo(wrapper);
             pager.appendTo(wrapper);
         }
-        initSocial();
+        yandexSocial();
     };
 
     this.close = function () {
