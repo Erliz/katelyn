@@ -1,3 +1,4 @@
+{% set staticVersion = '?v=0' %}
 <!DOCTYPE html>
 <!--[if lt IE 7]>
 <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
@@ -28,7 +29,7 @@
     <link rel="favicon" href="/favicon.ico">
     {% block css %}
     <link rel="stylesheet" href="/css/normalize.css">
-    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/main.css{{ staticVersion }}">
     {% endblock %}
     <script src="/js/vendor/modernizr-2.6.2.min.js"></script>
     <script type="text/javascript" src="//vk.com/js/api/openapi.js?79"></script>
@@ -77,8 +78,8 @@
     {#<!-- my.com -->#}
     {#<script src="http://cdn.connect.mail.ru/js/loader.js" type="text/javascript" charset="UTF-8"></script>#}
     <!-- Site`s js -->
-    <script src="/js/plugins.js"></script>
-    <script src="/js/main.js"></script>
+    <script src="/js/plugins.js{{ staticVersion }}"></script>
+    <script src="/js/main.js{{ staticVersion }}"></script>
 {% endblock %}
     <script>
         $(document).ready(function(){
