@@ -3,13 +3,15 @@
 
 # TEAM
 
-    <name> -- <role> -- <twitter>
+    Stanislav Vetlovskiy -- Coder -- @mrErliz
 
 # THANKS
 
-    <name>
+    GitHub.com
 
 # TECHNOLOGY COLOPHON
 
-    HTML5, CSS3
-    jQuery, Modernizr
+    Last update: 2013/03/16
+    Standards: HTML5, CSS3, PSR3, GIT
+    Components: html5Boilerplate, Modernizr, jQuery, jQueryUI, jQuery File Upload, Messi
+    Software: JetBrains phpStorm, MySQL Workbench, phpMyAdmin
