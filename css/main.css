@@ -199,6 +199,12 @@ body {
     margin-left: 283px;
 }
 
+#photo_view_wrapper {
+    width: 750px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .photo_page_wrapper {
     position: relative;
     margin-left: auto;
@@ -208,7 +214,7 @@ body {
 .substrate {
     position: fixed;
     width: 100%;
-    height: 520px;
+    height: 600px;
     z-index: -1;
 }
 

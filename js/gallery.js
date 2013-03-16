@@ -93,6 +93,7 @@ function Gallery(id) {
             content: 'content',
             photo_pager: 'photo_pager',
             viewPager: 'photo_view_pager',
+            viewWrapper: 'photo_view_wrapper',
             block: 'photo_view_block',
             social: 'photo_view_social'
         },
@@ -237,8 +238,9 @@ function Gallery(id) {
     };
 
     this.removeView = function () {
-        this.getElement('social').remove();
-        this.getElement('block').remove();
+        this.getElement('viewWrapper').remove();
+//        this.getElement('social').remove();
+//        this.getElement('block').remove();
         this.getElement('viewPager').remove();
     };
 }
