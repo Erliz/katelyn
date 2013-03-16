@@ -22,7 +22,11 @@
             </section>
             <div class="tile horizontal black_on_white block_feedback">
                 <form action="" id="feedback_form" class="feedback" method="post" onsubmit="sendFeedback(this);return false;">
-                    <section>
+                        <section>
+                        <br>
+                        <div class="avatara" style="position: absolute">
+                        <img src="/img/Kate.jpg">
+                        </div>
                         <label for="form_name" class="horizontal"><strong>Ваше имя</strong></label>
                         <input id="form_name" class="photo rigth black_on_white form_field" type="text" name="name">
                         <div class="clearfix"></div>
@@ -31,12 +35,13 @@
                         <div class="clearfix"></div>
                         <label for="form_phone" class="horizontal"><strong>Ваш телефон</strong></label>
                         <input id="form_phone" class="photo rigth black_on_white form_field" type="text" name="phone">
+                        <textarea class="photo black_on_white" name="content" rows="8" cols="70" id="form_text"
+                          placeholder="Введите текст сообщения"></textarea>
                         <div class="clearfix"></div>
-                    </section>
-                    <label for="form_text"><strong>Текст сообщения</strong></label>
-                    <textarea class="photo black_on_white" name="content" rows="8" cols="70" id="form_text"></textarea>
-                    <div class="clearfix"></div>
-                    <a href="javascript:void(0)" onclick="$('#feedback_form').submit()" class="photo white_on_blue noresize" id="form_submit">Отправить</a>
+                        </section>
+
+                    <a href="javascript:void(0)" onclick="$('#feedback_form').submit()" class="photo white_on_blue noresize"
+                       id="form_submit">Отправить</a>
                 </form>
             </div>
         </div>

@@ -310,19 +310,19 @@ a.album_title {
 
 /* feedback */
 .block_feedback section{
-    width: 30.5em;
+    width: 27em;
 }
 
 .block_feedback label {
     line-height: 2em;
 }
 .block_feedback input {
-    width: 20em;
+    width: 19em;
     border: none;
 }
 
 .block_feedback textarea {
-    width: 30em;
+    width: 36em;
     height: 9em;
     margin-left: -1px;
     resize: none;
@@ -335,6 +335,11 @@ a.album_title {
 
 form.feedback {
     padding: 15px 0 0 50px;
+}
+
+#form_text {
+    position: relative;;
+    top: 4px;
 }
 
 .black_on_white {
@@ -386,6 +391,27 @@ li.social_vk{ background-position: 0 0;}
 li.social_mailru{ background-position: -176px 0;}
 li.social_twitter{ background-position: -264px 0;}
 li.social_yandex{ background-position: -440px 0;}
+
+div.social{
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 7px;
+    width: auto;
+    height: 27px;
+    text-align: center;
+}
+
+.social ul{
+    padding: 0;
+    margin: 0;
+    height: inherit;
+}
+
+.social li{
+    position: relative;
+    display: inline-block;
+    height: inherit;
+}
 /* end social */
 
 .block_vertical {
@@ -408,6 +434,8 @@ div.text_block h1 {
     position: relative;
     display: block;
     text-align: center;
+    top: 4px;
+    margin-left: 0;
     width: 120px;
     padding: 5px;
     text-decoration: none;
@@ -419,7 +447,7 @@ div.text_block h1 {
 }
 /* end signIn form */
 .pager {
-    padding-top: 5px;
+    padding-top: 7px;
     text-align: center;
 }
 
@@ -440,6 +468,57 @@ a.pager_arrow {
 
 a.pager_current {
     background-color: rgba(0, 186, 255, 0.5);
+}
+
+.carrot_logo {
+    height: 38px;
+    width: 38px;
+    margin: 18px;
+    margin-left: auto;
+    margin-right: 535px;
+    -webkit-transition-property: -webkit-transform;
+    -webkit-transition-duration: 1s;
+    -moz-transition-property: -moz-transform;
+    -moz-transition-duration: 1s;
+}
+
+.carrot_logo:hover {
+    animation-name: rotate;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    -webkit-animation-name: rotate;
+    -webkit-animation-duration: 3s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+    -moz-animation-name: rotate;
+    -moz-animation-duration: 3s;
+    -moz-animation-iteration-count: infinite;
+    -moz-animation-timing-function: linear;
+}
+
+@keyframes rotate {
+    from {transform: rotate(0deg);}
+    to {transform: rotate(-360deg);}
+}
+
+@-webkit-keyframes rotate {
+    from {-webkit-transform: rotate(0deg);}
+    to {-webkit-transform: rotate(-360deg);}
+}
+
+@-moz-keyframes rotate {
+    from {-moz-transform: rotate(0deg);}
+    to {-moz-transform: rotate(-360deg);}
+}
+
+.avatara {
+    height: 87px;
+    width: 140px;
+    margin: 5px;
+    margin-left: 439px;
+    margin-right: auto;
+    background-color: rgba(255, 255, 255, 0.1);
 }
 
 /* ==========================================================================

@@ -6,9 +6,9 @@ function Photo(object) {
     this.is_vertical = object.is_vertical;
     this.time_upload = object.time_upload;
 
-    this.getId=function(){
+    this.getId = function () {
         return this.id;
-    }
+    };
 
     this.getTitle = function () {
         return this.title;
@@ -22,7 +22,7 @@ function Photo(object) {
         return '/files/photo/' + this.id + '.jpg';
     };
 
-    this.isVertical = function(){
+    this.isVertical = function () {
         return this.is_vertical;
     }
 }
@@ -50,7 +50,7 @@ function Collection(array) {
         return false;
     };
 
-    this.getLibrary = function (){
+    this.getLibrary = function () {
         return this.library;
     };
 
@@ -84,32 +84,33 @@ function Collection(array) {
 function Gallery(id) {
     // selectors
     this.dom = {
-        classes:{
-            listing:'photo_page',
-            pager:'pager',
-            substrate:'substrate'
+        classes: {
+            listing: 'photo_page',
+            pager: 'pager',
+            substrate: 'substrate'
         },
-        elements:{
-            content:'content',
-            photo_pager:'photo_pager',
-            viewPager:'photo_view_pager',
-            block:'photo_view_block'
+        elements: {
+            content: 'content',
+            photo_pager: 'photo_pager',
+            viewPager: 'photo_view_pager',
+            block: 'photo_view_block',
+            social: 'photo_view_social'
         },
-        tmpl:{
-            block:'tmpl_photo_view',
-            pager:'tmpl_photo_view_pager'
+        tmpl: {
+            block: 'tmpl_photo_view',
+            pager: 'tmpl_photo_view_pager'
         }
     };
     // properties
     this.album = {
-        id:id,
-        title:null,
-        description:null,
-        cover:null
+        id: id,
+        title: null,
+        description: null,
+        cover: null
     };
     this.collection = null;
-    this.isShowing=false;
-    this.showingPhoto=null;
+    this.isShowing = false;
+    this.showingPhoto = null;
     // methods
     this.init = function () {
         this.requestCollection();
@@ -138,11 +139,11 @@ function Gallery(id) {
         if (this.collection) return;
         var object = this;
         $.ajax({
-            async:false,
-            type:'GET',
-            url:'/ajax/album/collection/' + this.album.id,
-            dataType:'json',
-            success:function (data) {
+            async: false,
+            type: 'GET',
+            url: '/ajax/album/collection/' + this.album.id,
+            dataType: 'json',
+            success: function (data) {
                 data = data.data;
                 object.album.title = data.title;
                 object.album.description = data.description;
@@ -176,7 +177,7 @@ function Gallery(id) {
 
     this.showPhoto = function (id) {
         this.showingPhoto = this.collection.getById(id);
-        if(this.showingPhoto) {
+        if (this.showingPhoto) {
             var tpl = this.getTmpl(
                 'block',
                 {
@@ -197,35 +198,45 @@ function Gallery(id) {
             );
             setHash(id);
         }
-        else {console.log('No such photo with id "'+id+'"');return;}
+        else {
+            console.log('No such photo with id "' + id + '"');
+            return;
+        }
         var wrapper = this.getElement('content');
-        if(!this.isShowing){
+        if (!this.isShowing) {
             this.sceneClear();
             var object = this;
-            $('<div></div>').addClass('substrate').click(function(){object.close()}).appendTo(wrapper);
+            $('<div></div>').addClass('substrate').click(function () {
+                object.close()
+            }).appendTo(wrapper);
             tpl.hide().appendTo(wrapper).fadeIn();
             pager.hide().appendTo(wrapper).fadeIn();
-            this.isShowing=true;
-            $(document).keyup(function(e) {
+            this.isShowing = true;
+            $(document).keyup(function (e) {
                 if (e.keyCode == 27) {
                     object.close();
                 }
             });
         } else {
-            this.getElement('block').remove();
-            this.getElement('viewPager').remove();
+            this.removeView();
             tpl.appendTo(wrapper);
             pager.appendTo(wrapper);
         }
+        initSocial();
     };
 
-    this.close = function(){
+    this.close = function () {
         this.getClass('substrate').remove();
-        this.getElement('block').remove();
-        this.getElement('viewPager').remove();
+        this.removeView();
         this.sceneFill();
         setHash('');
         $(document).keyup();
-        this.isShowing=false;
-    }
+        this.isShowing = false;
+    };
+
+    this.removeView = function () {
+        this.getElement('social').remove();
+        this.getElement('block').remove();
+        this.getElement('viewPager').remove();
+    };
 }

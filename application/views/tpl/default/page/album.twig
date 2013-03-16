@@ -1,5 +1,11 @@
 {% extends "base.twig" %}
 
+{% block ogImage %}
+    {% for photo in request.album.photos.getCollection() %}
+    <meta property="og:image" content="http://katelyn.ru/files/photo/thumbnail/{{ photo.getId() }}.jpg" />
+    {% endfor %}
+{% endblock %}
+
 {% block content %}
     {% set currentUri = '/albums/id/'~request.album.getId()~'/' %}
     {% set fullWidth = 945 %}
@@ -53,11 +59,18 @@
     <script src="/js/vendor/jquery.tmpl.min.js"></script>
     <script id="tmpl_photo_view" type="text/x-jquery-tmpl">
         {% verbatim %}
-        <div id="photo_view_block" class="photo_view_wrapper{{if photo.isVertical()}} photo_view_vertical{{/if}}">
-            <div class="photo_view" onclick="gallery.showPhoto(${next.getId()})" style="background-image: url('${photo.getUrl()}');">
-                <!--<span class="photo_view_title">${photo.getTitle()}</span>-->
-            </div>
+
+        <div id="photo_view_social" class="social">
+            <div class="yashare-auto-init" data-yashareLink="" data-yashareTitle="" data-yashareDescription=""
+                 data-yashareImage=""
+                 data-yashareQuickServices="gplus,vkontakte,facebook,moimir,odnoklassniki,yaru,twitter"
+                 data-yashareTheme="counter" data-yashareType="small"></div>
         </div>
+        <div id="photo_view_block" class="photo_view_wrapper{{if photo.isVertical()}} photo_view_vertical{{/if}}">
+        <div class="photo_view" onclick="gallery.showPhoto(${next.getId()})" style="background-image: url('${photo.getUrl()}');">
+            <!--<span class="photo_view_title">${photo.getTitle()}</span>-->
+        </div>
+
         {% endverbatim %}
     </script>
     <script id="tmpl_photo_view_pager" type="text/x-jquery-tmpl">
@@ -82,3 +95,16 @@
     gallery=new Gallery({{ request.album.id }});
     gallery.init();
 {% endblock %}
+
+{#
+<ul>
+                <li style="width: 65px"><div style="margin-top: 16px"><div class="g-plusone" data-size="medium"></div></div></li>
+                <li style="width: 85px"><div style="margin-top: 16px"><div id="vk_like"></div></div></li>
+                <li><div style="margin-top: 16px"><div class="fb-like" data-href="http://www.katelyn.ru" data-send="false" data-layout="button_count"
+                         data-width="20" data-show-faces="false" data-font="arial"></div></div></li>
+                <li><div><a target="_blank" class="mrc__plugin_uber_like_button" href="http://connect.mail.ru/share"
+                        data-mrc-config="{'nt' : '1', 'cm' : '1', 'ck' : '1', 'sz' : '20', 'st' : '2', 'tp' : 'combo'}">Нравится</a></div></li>
+                <li><div><div class="yashare-auto-init" data-yashareL10n="ru" data-yashareType="none"
+                         data-yashareQuickServices="yaru,twitter,lj,moikrug"></div></div></li>
+            </ul>
+#}

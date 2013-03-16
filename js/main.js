@@ -57,3 +57,39 @@ function sendFeedback(form){
         }
     });
 }
+
+(function () {
+    var imgPool = [
+        '/img/carrot/carrot22.png',
+        '/img/carrot/carrot33.png',
+        '/img/carrot/carrot44.png',
+        '/img/carrot/carrot11.png'
+    ];
+    var imgDefault ='/img/carrot/carrot70.png';
+    var imgEl = $('#carrot');
+    if(!Modernizr.cssanimations || $.browser.opera){
+        var intervalId;
+        imgEl.mouseenter(function() {
+            var i = 0;
+            intervalId = setInterval(function () {
+                if(i == 3) i = 0;
+                imgEl.attr('src', imgPool[i]);
+                i++;
+            }, 110);
+        });
+        imgEl.mouseleave(function() {
+            if(intervalId){
+                clearInterval(intervalId);
+                imgEl.attr('src', imgDefault);
+                intervalId = false;
+            }
+        });
+    } else {
+        imgEl.mouseenter(function() {
+            imgEl.attr('src', imgPool[0]);
+        });
+        imgEl.mouseleave(function() {
+            imgEl.attr('src', imgDefault);
+        });
+    }
+})();

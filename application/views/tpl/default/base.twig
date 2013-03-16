@@ -17,17 +17,20 @@
         <meta name="description" content="{{ general.description }}">
     {% endblock %}
     {% block headKeywords %}
-        <meta name="keywords"
-              content="{{ general.keywords }}">
+        <meta name="keywords" content="{{ general.keywords }}">
     {% endblock %}
     <meta name="viewport" content="width=device-width">
-    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <meta property="og:title" content="{{ general.title }}" />
+    <meta property="og:description" content="{{ general.description }}" />
+    <meta property="og:image" content="http://katelyn.ru/img/og.jpg" />
+    {% block ogImage %}{% endblock %}
     <link rel="favicon" href="/favicon.ico">
     {% block css %}
     <link rel="stylesheet" href="/css/normalize.css">
     <link rel="stylesheet" href="/css/main.css">
     {% endblock %}
     <script src="/js/vendor/modernizr-2.6.2.min.js"></script>
+    <script type="text/javascript" src="//vk.com/js/api/openapi.js?79"></script>
 </head>
 <body>
 <!--[if lt IE 7]>
@@ -36,6 +39,11 @@
 <![endif]-->
 
 {% block header %}
+    <div class="carrot_logo rotate">
+        <a href="/">
+            <img id="carrot" src="/img/carrot/carrot70.png" />
+        </a>
+    </div>
     <div class="layout_text restriction">18+</div>
     <div class="layout_text header">
         <a href="/">
@@ -62,11 +70,31 @@
     <!-- Messi -->
     <link rel="stylesheet" href="/js/vendor/messi/messi.min.css">
     <script src="/js/vendor/messi/messi.min.js"></script>
+    <!-- yandex social hack -->
+    <script src="/js/vendor/yandexSocial.js" charset="utf-8"></script>
+    {#<script src="//yandex.st/share/cnt.share.js"></script>#}
+    {#<!-- my.com -->#}
+    {#<script src="http://cdn.connect.mail.ru/js/loader.js" type="text/javascript" charset="UTF-8"></script>#}
     <!-- Site`s js -->
     <script src="/js/plugins.js"></script>
     <script src="/js/main.js"></script>
 {% endblock %}
-    <script>$(document).ready(function(){ {% block js_ready %}{% endblock %} });</script>
+    <script>
+        $(document).ready(function(){
+            window.___gcfg = {lang: 'ru'};
+            {#VK.init({apiId: 3449984, onlyWidgets: true});
+            (function(d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) return;
+                js = d.createElement(s); js.id = id;
+                js.src = "//connect.facebook.net/ru_RU/all.js#xfbml=1";
+                fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));#}
+            yandexSocial();
+            {% block js_ready %}{% endblock %}
+        });
+    </script>
+
 
 {% block counters %}
     {% include 'counter/google.twig' %}
