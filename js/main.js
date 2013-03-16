@@ -71,7 +71,7 @@ function sendFeedback(form){
     ];
     var imgDefault ='/img/carrot/carrot70.png';
     var imgEl = $('#carrot');
-    if(!Modernizr.cssanimations || isOpera){
+    if(!Modernizr.cssanimations || isOpera()){
         var intervalId;
         imgEl.mouseenter(function() {
             var i = 0;
