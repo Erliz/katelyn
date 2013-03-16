@@ -177,31 +177,29 @@ function Gallery(id) {
 
     this.showPhoto = function (id) {
         this.showingPhoto = this.collection.getById(id);
-        if (this.showingPhoto) {
-            var tpl = this.getTmpl(
-                'block',
-                {
-                    photo: this.showingPhoto,
-                    next: this.getCollection().getNext(id) || this.getCollection().getByKey(0)
-                }
-            );
-            var pager = this.getTmpl(
-                'pager',
-                {
-                    collection: this.getCollection().getLibrary(),
-                    current: this.showingPhoto,
-                    position: this.getCollection().getPositionById(id),
-                    size: this.getCollection().getSize(),
-                    next: this.getCollection().getNext(id),
-                    prev: this.getCollection().getPrev(id)
-                }
-            );
-            setHash(id);
-        }
-        else {
+        if (!this.showingPhoto) {
             console.log('No such photo with id "' + id + '"');
             return;
         }
+        var tpl = this.getTmpl(
+            'block',
+            {
+                photo: this.showingPhoto,
+                next: this.getCollection().getNext(id) || this.getCollection().getByKey(0)
+            }
+        );
+        var pager = this.getTmpl(
+            'pager',
+            {
+                collection: this.getCollection().getLibrary(),
+                current: this.showingPhoto,
+                position: this.getCollection().getPositionById(id),
+                size: this.getCollection().getSize(),
+                next: this.getCollection().getNext(id),
+                prev: this.getCollection().getPrev(id)
+            }
+        );
+        setHash(id);
         var wrapper = this.getElement('content');
         if (!this.isShowing) {
             this.sceneClear();
@@ -209,9 +207,12 @@ function Gallery(id) {
             $('<div></div>').addClass('substrate').click(function () {
                 self.close()
             }).appendTo(wrapper);
-            console.log(tpl);
-            tpl.hide().appendTo(wrapper).fadeIn();
-            pager.hide().appendTo(wrapper).fadeIn();
+            tpl.hide(0, function(){
+                tpl.appendTo(wrapper).fadeIn();
+            });
+            pager.hide(0, function(){
+                pager.appendTo(wrapper).fadeIn();
+            });
             this.isShowing = true;
             $(document).keyup(function (e) {
                 if (e.keyCode == 27) {

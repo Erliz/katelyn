@@ -59,18 +59,18 @@
     <script src="/js/vendor/jquery.tmpl.min.js"></script>
     <script id="tmpl_photo_view" type="text/x-jquery-tmpl">
         {% verbatim %}
-
-        <div id="photo_view_social" class="social">
-            <div class="yashare-auto-init" data-yashareLink="" data-yashareTitle="" data-yashareDescription=""
-                 data-yashareImage=""
-                 data-yashareQuickServices="gplus,vkontakte,facebook,moimir,odnoklassniki,yaru,twitter"
-                 data-yashareTheme="counter" data-yashareType="small"></div>
-        </div>
-        <div id="photo_view_block" class="photo_view_wrapper{{if photo.isVertical()}} photo_view_vertical{{/if}}">
-        <div class="photo_view" onclick="gallery.showPhoto(${next.getId()})" style="background-image: url('${photo.getUrl()}');">
-            <!--<span class="photo_view_title">${photo.getTitle()}</span>-->
-        </div>
-
+        <section>
+            <div id="photo_view_social" class="social">
+                <div class="yashare-auto-init" data-yashareLink="" data-yashareTitle="" data-yashareDescription=""
+                     data-yashareImage=""
+                     data-yashareQuickServices="gplus,vkontakte,facebook,moimir,odnoklassniki,yaru,twitter"
+                     data-yashareTheme="counter" data-yashareType="small"></div>
+            </div>
+            <div id="photo_view_block" class="photo_view_wrapper{{if photo.isVertical()}} photo_view_vertical{{/if}}">
+            <div class="photo_view" onclick="gallery.showPhoto(${next.getId()})" style="background-image: url('${photo.getUrl()}');">
+                <!--<span class="photo_view_title">${photo.getTitle()}</span>-->
+            </div>
+        </section>
         {% endverbatim %}
     </script>
     <script id="tmpl_photo_view_pager" type="text/x-jquery-tmpl">
