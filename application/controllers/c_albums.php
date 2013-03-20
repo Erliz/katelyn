@@ -9,16 +9,22 @@ class C_Albums extends C_Base
     public function index()
     {
         $page = 1;
-        if (!empty($_GET['page']) && $_GET['page'] > 0 && preg_match('/[0-9]+/', $_GET['page'])) {
+        if (!empty($_GET['page']) && preg_match('/[0-9]+/', $_GET['page'])) {
             $page = strip_tags($_GET['page']);
         }
         $model = new M_Album();
+        $pageCount = $model->getPagesCount();
+        if ($page > $pageCount) {
+            $this->forward('/albums/', array('page'=>$pageCount));
+        } elseif ($page < 0) {
+            $this->forward('/albums/');
+        }
         Registry::$display->assign(
             array(
                 'request' => array(
                     'albums'    => $model->getPage($page)->getCollection(),
                     'page'      => $page,
-                    'pageCount' => $model->getPagesCount()
+                    'pageCount' => $pageCount
                 )
             )
         );
@@ -37,6 +43,13 @@ class C_Albums extends C_Base
         $album->fillPhotos();
 
         $album->photos->renderPages();
+
+        $pageCount = $album->photos->getPagesSize() - 1;
+        if ($page > $pageCount) {
+            $this->forward("/albums/id/$id/$pageCount/");
+        } elseif ($page < 0) {
+            $this->forward("/albums/id/$id/");
+        }
 
         Registry::$display->assign(
             array(

@@ -32,5 +32,18 @@ Abstract Class C_Base
         );
     }
 
+    public function forward($uri, $params = array())
+    {
+        $get = array();
+        foreach ($params as $key => $var) {
+            $get[] = $key . '=' . $var;
+        }
+        if (!empty($get)) {
+            $uri .= '?' . join('&', $get);
+        }
+        header('Location: ' . $uri);
+        exit;
+    }
+
     abstract function index();
 }
