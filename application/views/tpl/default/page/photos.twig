@@ -4,7 +4,7 @@
     <div id="content" style="display: none;">
         <div class="photo_page">
             {% if request.albums|length>0 %}
-            <section class="photo_line">
+            <section>
                 {% for album in request.albums %}
                 <a href="/albums/{{ album.getId() }}/">
                     <div class="photo horizontal picture_big picture_text white_on_blue">

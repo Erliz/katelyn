@@ -1,11 +1,12 @@
 {% extends "base.twig" %}
 
 {% block content %}
+    {% set currentUri = '/albums/' %}
     <div id="content" style="display: none;">
         <div class="photo_page">
-            {% if request.albums|length>0 %}
+        {% if request.albums|length>0 %}
             <section class="photo_line">
-                {% for album in request.albums %}
+            {% for album in request.albums %}
                 <div class="js_album_wrapper photo picture_big horizontal white_on_blue"
                 {% if album.getCover() is not null %}
                         style="background-image: url('/files/photo/thumbnail/{{ album.getCover() }}.jpg');"
@@ -14,20 +15,20 @@
                     <span class="album_title">{{ album.getTitle() }}</span>
                 </a>
                 </div>
-                {#<a style="display: block;float: left;width: 264px;height: 176px;" href="/albums/id/{{ album.getId() }}/">
-                    <div class="photo picture_big picture_text picture_text_min white_on_blue"
-                     {% if album.getCover() is not null %}
-                         style="background-image: url('/files/photo/thumbnail/{{ album.getCover() }}.jpg')"
-                     {% endif %}>
-                        <span>{{ album.getTitle() }}</span>
-                    </div>
-                    <div><span style="height: 50px; background-color: rgba(0,0,0,0.5)">{{ album.getTitle() }}</span></div>
-                </a>#}
-                {% endfor %}
+            {% endfor %}
             </section>
-            <section>
-            </section>
-            {% endif %}
+        {% endif %}
+        </div>
+        <div id="photo_pager" class="pager">
+            <a href="{{ currentUri~'?page='~(request.page-1) }}"
+               {% if request.page == 1 %}style="visibility: hidden;"{% endif %}
+               class="pager_arrow">&nbsp;</a>
+            {% for pageNum in 1..request.pageCount %}
+                <a href="{{ currentUri~'?page='~(pageNum) }}" {% if (pageNum) == request.page %}class="pager_current"{% endif %}>&nbsp;</a>
+            {% endfor %}
+            <a href="{{ currentUri~'?page='~(request.page+1) }}"
+               {% if request.pageCount<=request.page %}style="visibility: hidden;"{% endif %}
+               class="pager_arrow">&nbsp;</a>
         </div>
     </div>
 {% endblock %}

@@ -144,6 +144,12 @@ body {
     color: inherit;
 }
 
+.photo_line {
+    width: 825px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .photo_page {
     height: 372px;
     width: 945px;
