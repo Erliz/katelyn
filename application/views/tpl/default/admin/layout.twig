@@ -1,8 +1,10 @@
 {% extends "base.twig" %}
 
 {% block css %}
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    {#<link rel="stylesheet" href="/css/bootstrap-responsive.min.css">#}
     {{ parent() }}
-    <link rel="stylesheet" href="/css/admin.css">
+    <link rel="stylesheet" href="/css/admin.css{{ staticVersion }}">
 {% endblock %}
 
 {% block counters %}
@@ -11,5 +13,6 @@
 
 {% block js %}
     {{ parent() }}
-    <script src="/js/admin.js"></script>
+    <script src="/js/vendor/bootstrap.min.js"></script>
+    <script src="/js/admin.js{{ staticVersion }}"></script>
 {% endblock %}

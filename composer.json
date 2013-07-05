@@ -1,0 +1,24 @@
+{
+    "name": "erliz/katelyn",
+    "description": "Photographer`s home site",
+    "minimum-stability": "stable",
+    "homepage": "http://katelyn.ru",
+    "authors": [
+        {
+            "name": "Stanislav Vetlovskiy",
+            "email": "mrerliz@gmail.com"
+        },
+        {
+            "name": "Ekaterina Klementyeva",
+            "email": "katelyn.k@ya.ru"
+        }
+    ],
+    "require": {
+        "php": ">=5.3",
+        "twig/twig": "1.*",
+        "twig/extensions": "1.0.*"
+    },
+    "autoload": {
+        "psr-0": { "": "application/" }
+    }
+}

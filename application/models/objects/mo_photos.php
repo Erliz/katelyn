@@ -20,7 +20,6 @@ class MO_Photos extends MO_Collection
         /*$fullLength = $horizontal->getSize() * $this->horizontalWidth + $vertical->getSize() * $this->verticalWidth;
         $halfLength = $fullLength / 2;
         $pagesCount = ceil($halfLength / $this->fullWidth);*/
-
         // first generate horizontal blocks
         if ($horizontal->getSize() > 0) {
             $horizontalOdd = (bool)($horizontal->getSize() % 2);
@@ -45,6 +44,8 @@ class MO_Photos extends MO_Collection
             // end
             $pages = array_merge($pages, array_chunk($horizontalBlocks, floor($this->fullWidth / $this->horizontalWidth)));
         }
+
+        M_Logger::echer($pages);
 
         if ($vertical->getSize() > 0) {
             $verticalOdd = (bool)$vertical->getSize() % 2;

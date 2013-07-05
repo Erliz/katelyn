@@ -1,6 +1,6 @@
 <?php
-include_once("autoloader.php");
-Autoloader::init();
+include_once("autoload.php");
+Autoload::init();
 ConfigPath::init();
 M_Logger::init();
 if (isset($_GET['debug'])) {

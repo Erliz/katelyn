@@ -1,9 +1,10 @@
 ## Project
+application/cache/*
 application/config/configdb.php
 application/config/configserv.php
-application/views/Twig/*
-img/main/*
-doc/*
+vendor/*
+shared/*
+
 #################
 ## JetBrains
 #################

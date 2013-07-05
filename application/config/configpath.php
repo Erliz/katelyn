@@ -5,30 +5,29 @@ class ConfigPath
     public static $url;
     public static $script;
     public static $application = 'application/';
-    public static $core_cache = 'application/logs/cache/';
-    public static $logs_core = 'application/logs/';
-    public static $logic = 'application/logic/';
-    public static $files = 'files/';
-    public static $photo = 'files/photo/';
-    public static $photoTbn = 'files/photo/thumbnail/';
-    public static $photoTmp = 'files/temp/';
-    public static $photoTmpTbn = 'files/temp/thumbnail/';
+    public static $cacheTwig   = 'application/cache/twig';
+    public static $twigTpl     = 'application/views/tpl/%s/';
+    public static $cache       = 'shared/cache/';
+    public static $files       = 'shared/files/';
+    public static $photo       = 'shared/files/photo/';
+    public static $photoTbn    = 'shared/files/photo/thumbnail/';
+    public static $photoTmp    = 'shared/files/temp/';
+    public static $photoTmpTbn = 'shared/files/temp/thumbnail/';
+    public static $logs        = 'shared/logs/';
+    public static $web         = 'web/';
     // public settings
     public static $publicDomain = 'katelyn.ru';
-    public static $publicPort = '80';
+    public static $publicPort   = '80';
     public static $publicHost;
-    public static $publicParserStat = 'automate/parser/stat/';
-    public static $publicParserReesult = 'automate/parser/result/';
 
     public static function init()
     {
         ConfigServ::init();
+        self::$real = SITE_PATH;
         if (isset($_SERVER['SERVER_ADDR'])) {
-            self::$real = $_SERVER['DOCUMENT_ROOT'] . '/';
             self::$url = 'http://' . $_SERVER['HTTP_HOST'] . '/';
             self::$script = $_SERVER['SCRIPT_FILENAME'];
         } elseif (PHP_SAPI === 'cli') {
-            self::$real = ConfigServ::$server->dirRoot;
             self::$url = 'http://' . ConfigServ::$server->ipLocal . '/';
             self::$script = $_SERVER['SCRIPT_FILENAME'];
         }
