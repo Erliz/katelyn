@@ -1,8 +1,7 @@
 <?php
 /**
- * User: Elio
- * Date: 23.12.12
- *
+ * @author Stanislav Vetlovskiy
+ * @date 23.12.12
  */
 class C_Admin extends C_Base
 {
@@ -38,30 +37,26 @@ class C_Admin extends C_Base
         Registry::$display->disp($this->twigFolder . 'upload');
     }
 
-    public function edit($get)
-    {
-        if(!is_array($get) || count($get)==0){
-            $this->index();
-        }
-        $action = array_shift($get);
-        switch($action){
-            case 'albums': $this->albums(); break;
-            case 'album': $this->album($get); break;
-        }
-    }
-
-    private function albums()
+    public function albums()
     {
         $model=new M_Album();
+        $uri = '/admin/albums/';
+        $menu = array(
+            'title' => 'Albums',
+            'list' => array(
+                array('title' => 'Сортировка', 'link' => $uri.'sort/', 'active'=>false),
+                array('title' => 'Видимость', 'link' => $uri.'sort/', 'active'=>false)
+            )
+        );
         Registry::$display->assign(
-            Array('albums'=>$model->getAll())
+            array('albums'=>$model->getAll(), 'menu' => $menu)
         );
         Registry::$display->disp($this->twigFolder . 'albums');
     }
 
-    private function album($get)
+    public function album($get)
     {
-        $id = array_shift($get);
+        $id = (int)array_shift($get);
         $model=new M_Album();
         $album=$model->getById($id);
         if(!empty($_POST['title']) /*&& !empty($_POST['description'])*/){

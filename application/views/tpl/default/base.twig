@@ -1,4 +1,4 @@
-{% set staticVersion = '?v=2' %}
+{%- set staticVersion = '?v=2' -%}
 <!DOCTYPE html>
 <!--[if lt IE 7]>
 <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
@@ -28,8 +28,8 @@
     {% block ogImage %}{% endblock %}
     <link rel="favicon" href="/favicon.ico">
     {% block css %}
-    <link rel="stylesheet" href="/css/normalize.css">
-    <link rel="stylesheet" href="/css/main.css{{ staticVersion }}">
+        <link rel="stylesheet" href="/css/normalize.css">
+        <link rel="stylesheet" href="/css/main.css{{ staticVersion }}">
     {% endblock %}
     <script src="/js/vendor/modernizr-2.6.2.min.js"></script>
     <script type="text/javascript" src="//vk.com/js/api/openapi.js?79"></script>
@@ -61,7 +61,9 @@
 {% block footer %}
     {% set starYear = '2012' %}
     <div class="layout_text copyright"><span>Copyright {{ starYear }}{% if "now"|date("Y")>starYear %}-{{ "now"|date("Y") }}{% endif %} &copy; {{ general.header_text }}</span></div>
+    <div class="layout_text rusname"><span>Клементьева Екатерина, фотограф *</span></div>
 {% endblock %}
+
 {% block js %}
     <!-- jQuery -->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
@@ -81,21 +83,21 @@
     <script src="/js/plugins.js{{ staticVersion }}"></script>
     <script src="/js/main.js{{ staticVersion }}"></script>
 {% endblock %}
-    <script>
-        $(document).ready(function(){
-            window.___gcfg = {lang: 'ru'};
-            {#VK.init({apiId: 3449984, onlyWidgets: true});
-            (function(d, s, id) {
-                var js, fjs = d.getElementsByTagName(s)[0];
-                if (d.getElementById(id)) return;
-                js = d.createElement(s); js.id = id;
-                js.src = "//connect.facebook.net/ru_RU/all.js#xfbml=1";
-                fjs.parentNode.insertBefore(js, fjs);
-            }(document, 'script', 'facebook-jssdk'));#}
-            {% block js_ready %}{% endblock %}
-        });
-    </script>
 
+<script>
+    $(document).ready(function(){
+        window.___gcfg = {lang: 'ru'};
+        {#VK.init({apiId: 3449984, onlyWidgets: true});
+        (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/ru_RU/all.js#xfbml=1";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));#}
+        {% block js_ready %}{% endblock %}
+    });
+</script>
 
 {% block counters %}
     {% include 'counter/google.twig' %}

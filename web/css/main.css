@@ -95,7 +95,7 @@ textarea {
 
 body {
     overflow: hidden;
-    background: url("/img/background.jpg") top no-repeat #000;
+    background: url("/web/img/img/background.jpg") top no-repeat #000;
     background-size: 110% auto;
     /*background-attachment: fixed;*/
 }
@@ -109,6 +109,12 @@ body {
 .copyright {
     font-size: 12pt;
     left: 10px;
+    bottom: 5px;
+}
+
+.rusname {
+    font-size: 12pt;
+    right: 10px;
     bottom: 5px;
 }
 
@@ -302,6 +308,14 @@ body {
     font-size: 26px;
 }
 
+
+.picture_text_main {
+    text-decoration: none;
+    text-align: center;
+    line-height: 83px;
+    font-size: 26px;
+}
+
 .white_on_blue {
     color: #FFF;
     background-color: rgba(0, 186, 255, 0.5);
@@ -372,13 +386,13 @@ form.feedback {
 }
 
 .contacts_text{
-    line-height: 100px;
+    line-height: 48px;
 }
 
 /* start social */
 #social_container{
     padding: 5px;
-    margin-top: -30px;
+    margin-top: -1px;
     text-align: center;
 }
 #social_container a {
@@ -394,7 +408,7 @@ form.feedback {
 }
 #social_container li {
     display: inline-block;
-    background-image: url(/img/social/social.png);
+    background-image: url(/web/img/social/social.png);
     background-repeat: no-repeat;
 }
 li.social_fb{ background-position: -120px 0;}

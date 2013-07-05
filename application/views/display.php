@@ -1,22 +1,29 @@
 <?php
 Class Display
 {
-    public $assign = Array();
+    /** @var Twig_Environment */
     public $twig;
+    public $assign = array();
 
     function init($style)
     {
         if ($style == null) {
             $style = 'default';
         }
-        $path = SITE_PATH . 'application' . DIRSEP . 'views' . DIRSEP;
-        $loader = new Twig_Loader_Filesystem($path . 'tpl' . DIRSEP . $style . DIRSEP);
-        $cfg['cache'] = $path . 'tpl_c';
-        $cfg['auto_reload'] = true;
-        $cfg['strict_variables'] = false;
-        $cfg['debug'] = true;
-        $this->twig = new Twig_Environment($loader, $cfg);
-        $this->twig->addExtension(new Twig_Extensions_Extension_Debug());
+        $cfg = array(
+            'cache' => ConfigPath::$real . ConfigPath::$cacheTwig,
+            'auto_reload' => true,
+            'strict_variables' => false,
+            'debug' => Registry::$debug
+        );
+        $this->twig = new Twig_Environment(new Twig_Loader_Filesystem(sprintf(
+            ConfigPath::$real . ConfigPath::$twigTpl,
+            $style
+        )), $cfg);
+        $this->includeFilters();
+        if(Registry::$debug){
+            $this->twig->addExtension(new Twig_Extensions_Extension_Debug());
+        }
     }
 
     public function assign($array)
@@ -28,11 +35,19 @@ Class Display
         }
     }
 
-    function disp($tpl = 'index')
+    public function disp($tpl = 'index')
     {
         $this->init($this->assign['path']['style']);
         $template = $this->twig->loadTemplate($tpl . '.twig');
         $template->display($this->assign);
         exit;
+    }
+
+    private function includeFilters()
+    {
+        $chunkFilter = new Twig_SimpleFilter('chunk', function ($array, $size) {
+            return array_chunk($array, $size);
+        });
+        $this->twig->addFilter($chunkFilter);
     }
 }
