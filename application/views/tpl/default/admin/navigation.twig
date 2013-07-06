@@ -1,0 +1,18 @@
+<div class="well sidebar-nav sidebar-nav-extend">
+    <ul class="nav nav-list">
+        <li class="nav-header">Main Menu</li>
+        <li{% if activeMenu == 'albums' %} class="active"{% endif %}><a href="/admin/albums/">Альбомы</a></li>
+        <li{% if activeMenu == 'upload' %} class="active"{% endif %}><a href="/admin/upload/">Загрузка</a></li>
+    </ul>
+</div>
+
+{% if menu is defined and menu is not empty %}
+    <div class="well sidebar-nav sidebar-nav-extend">
+        <ul class="nav nav-list">
+            <li class="nav-header">{{ menu.title }}</li>
+            {% for item in menu.list %}
+            <li{% if item.active %} class="active"{% endif %}><a href="{{ item.link }}">{{ item.title }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endif %}

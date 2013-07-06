@@ -1,14 +1,10 @@
 {% extends "base.twig" %}
 
+{% set rootDir = 'adminNew' %}
+
 {% block css %}
     <link rel="stylesheet" href="/css/bootstrap.min.css">
-    {#<link rel="stylesheet" href="/css/bootstrap-responsive.min.css">#}
-    {{ parent() }}
-    <link rel="stylesheet" href="/css/admin.css{{ staticVersion }}">
-{% endblock %}
-
-{% block counters %}
-{# none #}
+    <link rel="stylesheet" href="/css/adminNew.css{{ staticVersion }}">
 {% endblock %}
 
 {% block js %}
@@ -16,3 +12,7 @@
     <script src="/js/vendor/bootstrap.min.js"></script>
     <script src="/js/admin.js{{ staticVersion }}"></script>
 {% endblock %}
+
+{% block header %}{% endblock %}
+{% block footer %}{% endblock %}
+{% block counters %}{% endblock %}

@@ -1,24 +1,31 @@
-{% extends "admin/layout.twig" %}
+{% extends 'adminNew/index.twig' %}
 
-{% block content %}
-    {% set albumUri = '/admin/edit/album/' %}
-    <div id="content">
-        {% if albums.getSize()>0 %}
-        <div class="photo_page">
-            <div class="tile horizontal black_on_white dashboard">
-                <a href="/admin/">Админка</a>
-                <hr>
-            {% for album in albums.getCollection() %}
-                <div>
-                    <a href="{{ albumUri }}{{ album.getId() }}/">{{ album.getTitle() }}</a>
-                </div>
-            {% endfor %}
-            </div>
+{% set activeMenu = 'albums' %}
+
+{% block centerColumn %}
+    {% if albums.getSize() == 0 %}
+        <div class="hero-unit">
+            <h1>Нет альбомов!</h1>
+            <p>На данный момент в базе нет ни одного альбома, который вы моглибы от модерировать.</p>
+            <p><a href="/admin/upload/" class="btn btn-primary btn-large">Создать »</a></p>
         </div>
-        {% else %}
-            <div class="text_block">
-                <h1>Альбомов не найдено</h1>
-            </div>
-        {% endif %}
-    </div>
+    {% else %}
+        <div class="well">
+            <h3>Альбомы</h3>
+            {#<div class="row-fluid">#}
+            {% for row in albums.getCollection()|chunk(5) %}
+                <ul class="thumbnails">
+                    {% for album in row %}
+                        <li class="span2">
+                            <h6>{{ album.getTitle() }}</h6>
+                            <a href="/admin/album/{{ album.getId() }}/" class="thumbnail">
+                                <img src="/files/photo/thumbnail/{{ album.getCover() }}.jpg" alt="{{ album.getTitle() }}"/>
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endfor %}
+            {#</div>#}
+        </div>
+    {% endif %}
 {% endblock %}
