@@ -2,12 +2,16 @@
 /**
  * @author Stanislav Vetlovskiy
  * @date 23.12.12
- *
  */
 class M_Album
 {
-    private $onPage = 6;
+    const ON_PAGE = 6;
 
+    /**
+     * @param $title
+     *
+     * @return array|bool
+     */
     public function createAlbum($title)
     {
         $title = trim(strip_tags($title));
@@ -25,10 +29,13 @@ class M_Album
         }
     }
 
+    /**
+     * @return MO_Albums
+     */
     public function getAll()
     {
         $collection = new MO_Albums();
-        $stmt = Registry::$db->query("SELECT * FROM `album`");
+        $stmt = Registry::$db->query("SELECT * FROM `album` ORDER BY `pos`");
         while ($row = $stmt->fetch()) {
             $collection->add(MO_Album::fromArray($row));
         }
@@ -36,11 +43,16 @@ class M_Album
         return $collection;
     }
 
+    /**
+     * @param int $page
+     *
+     * @return MO_Albums
+     */
     public function getPage($page = 1)
     {
         $collection = new MO_Albums();
-        $from = $this->onPage * ($page - 1);
-        $stmt = Registry::$db->query("SELECT * FROM `album` LIMIT $from, {$this->onPage}");
+        $from = self::ON_PAGE * ($page - 1);
+        $stmt = Registry::$db->query("SELECT * FROM `album` ORDER BY `pos` LIMIT $from, {self::ON_PAGE}");
         while ($row = $stmt->fetch()) {
             $collection->add(MO_Album::fromArray($row));
         }
@@ -48,12 +60,15 @@ class M_Album
         return $collection;
     }
 
+    /**
+     * @return int
+     */
     public function getPagesCount()
     {
         $stmt = Registry::$db->query("SELECT COUNT(*) as count FROM `album`");
         $result = $stmt->fetch();
 
-        return ceil($result['count'] / $this->onPage);
+        return ceil($result['count'] / self::ON_PAGE);
     }
 
     /**
