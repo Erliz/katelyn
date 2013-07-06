@@ -1,14 +1,15 @@
-{% extends "admin/layout.twig" %}
+{% extends "adminNew/layout.twig" %}
 
 {% block content %}
-
-<div id="content">
-    <div class="photo_page">
-        <div class="tile horizontal black_on_white dashboard">
-            <a href="/admin/upload/">Загрузка</a>
-            <a href="/admin/edit/albums/">Альбомы</a>
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span2">
+                {% include rootDir~'/navigation.twig' %}
+            </div>
+            <div class="span10">
+                {% block centerColumn%}
+                {% endblock %}
+            </div>
         </div>
     </div>
-</div>
-
 {% endblock %}
