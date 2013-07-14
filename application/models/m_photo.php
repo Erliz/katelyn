@@ -18,7 +18,9 @@ class M_Photo
         $result = array();
         if(isset($content) && count($content['files'])>0){
             foreach($content['files'] as $file){
-                $this->create($file);
+                $photo = $this->create($file);
+                $file->url = preg_replace('/[^\/]+\.jpg$/', $photo->getId().'.jpg', $file->url);
+                $file->thumbnail_url = preg_replace('/[^\/]+\.jpg$/', $photo->getId().'.jpg', $file->thumbnail_url);
                 $result[]=$file;
             }
         }

@@ -33,7 +33,7 @@ class MO_Album extends MO_DbObject
 
     public function saveToBase(){
         $this->setTimeModify();
-        parent::saveToBase();
+        return parent::saveToBase();
     }
 
     /**

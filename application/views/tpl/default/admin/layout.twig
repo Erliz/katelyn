@@ -1,16 +1,33 @@
 {% extends "base.twig" %}
 
-{% set rootDir = 'adminNew' %}
+{% set rootDir = 'admin' %}
 
 {% block css %}
     <link rel="stylesheet" href="/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/css/adminNew.css{{ staticVersion }}">
+    <link rel="stylesheet" href="/css/bootstrap-responsive.min.css">
+    <link rel="stylesheet" href="/css/admin.css{{ staticVersion }}">
 {% endblock %}
 
 {% block js %}
     {{ parent() }}
     <script src="/js/vendor/bootstrap.min.js"></script>
+    <script src="/js/vendor/doT.min.js"></script>
     <script src="/js/admin.js{{ staticVersion }}"></script>
+{% endblock %}
+
+{% block content %}
+    {% include 'template/jsMessage.twig' %}
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span2">
+                {% include rootDir~'/navigation.twig' %}
+            </div>
+            <div class="span10">
+                {% block centerColumn%}
+                {% endblock %}
+            </div>
+        </div>
+    </div>
 {% endblock %}
 
 {% block header %}{% endblock %}

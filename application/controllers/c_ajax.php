@@ -80,7 +80,7 @@ class C_Ajax extends C_Base
         $action = array_shift($get);
         $result=false;
         switch($action){
-            case 'new': $result=$model->createAlbum($_POST['title']); break;
+            case 'new': $result = $model->createAlbum($_POST['title']); break;
         }
 
         return $result;

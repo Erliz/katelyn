@@ -5,3 +5,24 @@ body {
 .sidebar-nav-extend {
     padding: 9px 0;
 }
+.near-select {
+    margin-bottom: 10px;
+}
+input.center {
+    text-align: center;
+    margin: 0 auto;
+    display: block;
+}
+.modal form {
+    margin: 0;
+}
+#messengerLayout {
+    position: absolute;
+    right: 20px;
+    width: 30%;
+    margin: -10px;
+}
+
+/*.fileupload-buttonbar {*/
+    /*padding-bottom: 30px;*/
+/*}*/
