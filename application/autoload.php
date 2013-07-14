@@ -6,7 +6,7 @@
 class Autoload
 {
     private static $instance;
-    private $cache;
+    private $dirsCache;
 
     /**
      * Initialize the autoload class
@@ -27,7 +27,7 @@ class Autoload
      */
     function __construct()
     {
-        $this->cache = $this->getAllDirectoriesRecursive(SITE_PATH . 'application');
+        $this->dirsCache = $this->getAllDirectoriesRecursive(SITE_PATH . 'application');
         spl_autoload_register(array($this, 'load'));
         require_once SITE_PATH . 'vendor' . DIRSEP . 'autoload.php';
     }
@@ -42,7 +42,7 @@ class Autoload
     private function load($className)
     {
         $filename = strtolower($className) . '.php';
-        foreach($this->cache as $dir) {
+        foreach($this->dirsCache as $dir) {
             if($this->includeFile($dir . DIRSEP . $filename)){
                 return true;
             }
@@ -50,6 +50,11 @@ class Autoload
         return false;
     }
 
+    /**
+     * @param string $path
+     *
+     * @return string[]
+     */
     private function getAllDirectoriesRecursive($path)
     {
         $directories = array();
@@ -60,11 +65,17 @@ class Autoload
         foreach (glob($path . '/*', GLOB_ONLYDIR) as $subDir) {
             $directories = array_merge($directories, $this->getAllDirectoriesRecursive($subDir));
         }
+        $directories = $this->filterDirectories($directories);
 
         return $directories;
     }
 
-    private function includeFile($file )
+    /**
+     * @param string $file
+     *
+     * @return bool
+     */
+    private function includeFile($file)
     {
         if (is_file($file)) {
             include_once($file);
@@ -72,5 +83,21 @@ class Autoload
         } else {
             return false;
         }
+    }
+
+    /**
+     * @param string[] $directories
+     *
+     * @return string[]
+     */
+    private function filterDirectories(array $directories)
+    {
+        foreach($directories as $key => $dir) {
+            if(strpos($dir, 'cache/twig') !== false){
+                unset($directories[$key]);
+            }
+        }
+
+        return $directories;
     }
 }
