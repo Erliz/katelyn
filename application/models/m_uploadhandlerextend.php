@@ -1,8 +1,7 @@
 <?php
 /**
- * User: Elio
- * Date: 07.01.13
- *
+ * @author: Stanislav Vetlovskiy
+ * @data 07.01.13
  */
 class M_UploadHandlerExtend extends UploadHandler
 {
@@ -12,7 +11,8 @@ class M_UploadHandlerExtend extends UploadHandler
     {
         $options = array(
             'upload_dir'     => ConfigPath::$real . ConfigPath::$photoTmp,
-            'upload_url'     => $this->get_full_url() . '/' . ConfigPath::$photoTmp,
+            'upload_url'     => ConfigPath::$url . 'files/photo/',
+//            'upload_url'     => $this->get_full_url() . '/' . ConfigPath::$photoTmp,
             'orient_image'   => true,
             'image_versions' => array(
                 ''          => array(
