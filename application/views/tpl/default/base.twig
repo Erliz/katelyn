@@ -1,4 +1,4 @@
-{% set staticVersion = '?v=2' %}
+{% set staticVersion = '?v=3' %}
 <!DOCTYPE html>
 <!--[if lt IE 7]>
 <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
@@ -61,8 +61,12 @@
 {% block footer %}
     {% set starYear = '2012' %}
     <div class="layout_text copyright"><span>Copyright {{ starYear }}{% if "now"|date("Y")>starYear %}-{{ "now"|date("Y") }}{% endif %} &copy; {{ general.header_text }}</span></div>
+    <div class="layout_text rusname"><span>Клементьева Екатерина, фотограф *</span></div>
 {% endblock %}
 {% block js %}
+
+
+
     <!-- jQuery -->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>

@@ -112,6 +112,12 @@ body {
     bottom: 5px;
 }
 
+.rusname {
+    font-size: 12pt;
+    right: 10px;
+    bottom: 5px;
+}
+
 .header {
     line-height: 0.6em;
     text-align: right;
@@ -204,6 +210,7 @@ body {
 .photo_view_vertical .photo_view_right {
     margin-left: 283px;
 }
+
 
 #photo_view_wrapper {
     width: 750px;
@@ -302,6 +309,14 @@ body {
     font-size: 26px;
 }
 
+
+.picture_text_main {
+    text-decoration: none;
+    text-align: center;
+    line-height: 83px;
+    font-size: 26px;
+}
+
 .white_on_blue {
     color: #FFF;
     background-color: rgba(0, 186, 255, 0.5);
@@ -372,13 +387,13 @@ form.feedback {
 }
 
 .contacts_text{
-    line-height: 100px;
+    line-height: 48px;
 }
 
 /* start social */
 #social_container{
     padding: 5px;
-    margin-top: -30px;
+    margin-top: -1px;
     text-align: center;
 }
 #social_container a {
