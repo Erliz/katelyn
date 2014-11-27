@@ -104,6 +104,7 @@
 {% block counters %}
     {% include 'counter/google.twig' %}
     {% include 'counter/yandex.twig' %}
+	{% include 'counter/mail.twig' with {account: '2594865'} only %}
 {% endblock %}
 </body>
 </html>
